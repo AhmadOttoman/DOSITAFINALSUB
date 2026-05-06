@@ -36,15 +36,15 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-engineering-navy/95 backdrop-blur-sm shadow-lg">
+    <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm shadow-md border-b border-border">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-center h-20 relative">
           {/* Desktop Navigation - Left Side */}
           <div className="hidden lg:flex items-center space-x-8 absolute left-0">
-            <a href="#home" onClick={() => handleNavClick("home")} className="text-white hover:text-primary transition-colors font-medium">
+            <a href="#home" onClick={() => handleNavClick("home")} className="text-engineering-navy hover:text-primary transition-colors font-medium">
               Home
             </a>
-            <a href="/products" onClick={(e) => { e.preventDefault(); navigate('/products'); }} className="text-white hover:text-primary transition-colors cursor-pointer font-medium">
+            <a href="/products" onClick={(e) => { e.preventDefault(); navigate('/products'); }} className="text-engineering-navy hover:text-primary transition-colors cursor-pointer font-medium">
               Our Products
             </a>
           </div>
@@ -56,10 +56,10 @@ const Navigation = () => {
 
           {/* Desktop Navigation - Right Side */}
           <div className="hidden lg:flex items-center space-x-8 absolute right-0">
-            <a href="#about" onClick={() => handleNavClick("about")} className="text-white hover:text-primary transition-colors font-medium">
+            <a href="#about" onClick={() => handleNavClick("about")} className="text-engineering-navy hover:text-primary transition-colors font-medium">
               About
             </a>
-            <a href="#contact" onClick={() => handleNavClick("contact")} className="text-white hover:text-primary transition-colors font-medium">
+            <a href="#contact" onClick={() => handleNavClick("contact")} className="text-engineering-navy hover:text-primary transition-colors font-medium">
               Contact Us
             </a>
           </div>
@@ -70,7 +70,7 @@ const Navigation = () => {
               variant="ghost"
               size="icon"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-white hover:text-primary"
+              className="text-engineering-navy hover:text-primary"
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
@@ -79,17 +79,17 @@ const Navigation = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden py-4 space-y-4 bg-engineering-navy/95">
-            <a href="#home" onClick={() => handleNavClick("home")} className="block text-white hover:text-primary transition-colors">
+          <div className="lg:hidden py-4 space-y-4 bg-white border-t border-border">
+            <a href="#home" onClick={() => handleNavClick("home")} className="block text-engineering-navy hover:text-primary transition-colors">
               Home
             </a>
-            <a href="/products" onClick={(e) => { e.preventDefault(); setIsMenuOpen(false); navigate('/products'); }} className="block text-white hover:text-primary transition-colors cursor-pointer">
+            <a href="/products" onClick={(e) => { e.preventDefault(); setIsMenuOpen(false); navigate('/products'); }} className="block text-engineering-navy hover:text-primary transition-colors cursor-pointer">
               Our Products
             </a>
-            <a href="#about" onClick={() => handleNavClick("about")} className="block text-white hover:text-primary transition-colors">
+            <a href="#about" onClick={() => handleNavClick("about")} className="block text-engineering-navy hover:text-primary transition-colors">
               About
             </a>
-            <a href="#contact" onClick={() => handleNavClick("contact")} className="block text-white hover:text-primary transition-colors">
+            <a href="#contact" onClick={() => handleNavClick("contact")} className="block text-engineering-navy hover:text-primary transition-colors">
               Contact Us
             </a>
           </div>
