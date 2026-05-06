@@ -22,16 +22,17 @@ All colors MUST be HSL.
     --popover-foreground: 200 15% 20%;
 
     /* Aqua-inspired teal/cyan blue palette */
-    --primary: 192 82% 51%;
+    /* Logo-inspired palette: deep teal + navy on white */
+    --primary: 182 94% 26%;
     --primary-foreground: 0 0% 100%;
     
-    --industrial-blue: 195 65% 42%;
+    --industrial-blue: 213 42% 29%;
     --industrial-blue-foreground: 0 0% 100%;
     
-    --engineering-navy: 200 50% 18%;
+    --engineering-navy: 213 42% 29%;
     --engineering-navy-foreground: 0 0% 100%;
     
-    --aqua-teal: 184 77% 34%;
+    --aqua-teal: 182 94% 26%;
     --aqua-teal-foreground: 0 0% 100%;
 
     --secondary: 200 20% 96%;
