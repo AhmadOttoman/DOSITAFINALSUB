@@ -51,7 +51,7 @@ const Navigation = () => {
 
           {/* Logo - Centered */}
           <div className="flex items-center justify-center">
-            <img src={dositaLogo} alt="Dosita" className="h-12 w-auto brightness-0 invert" />
+            <img src={dositaLogo} alt="Dosita" className="h-12 w-auto" />
           </div>
 
           {/* Desktop Navigation - Right Side */}

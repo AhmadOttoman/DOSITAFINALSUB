@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="mb-8">
           {/* Company Info */}
           <div className="max-w-2xl">
-            <img src={dositaLogo} alt="Dosita" className="h-16 w-auto mb-4 brightness-0 invert" />
+            <img src={dositaLogo} alt="Dosita" className="h-16 w-auto mb-4" />
             <p className="text-gray-300 mb-4 leading-relaxed">
               Engineering excellence in water treatment solutions. 
               Trusted by businesses worldwide for reliable, 
