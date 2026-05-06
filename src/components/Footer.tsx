@@ -1,4 +1,5 @@
 import { Separator } from "@/components/ui/separator";
+import dositaLogo from "@/assets/dosita-logo.svg";
 
 const Footer = () => {
   return (
@@ -7,14 +8,14 @@ const Footer = () => {
         <div className="mb-8">
           {/* Company Info */}
           <div className="max-w-2xl">
-            <div className="text-4xl font-bold mb-4 tracking-wider">AQUA</div>
+            <img src={dositaLogo} alt="Dosita" className="h-16 w-auto mb-4 brightness-0 invert" />
             <p className="text-gray-300 mb-4 leading-relaxed">
               Engineering excellence in water treatment solutions. 
               Trusted by businesses worldwide for reliable, 
               efficient, and compliant water systems.
             </p>
             <div className="text-sm text-gray-400">
-              <p>© 2024 AQUA. All rights reserved.</p>
+              <p>© 2024 Dosita. All rights reserved.</p>
             </div>
           </div>
         </div>
