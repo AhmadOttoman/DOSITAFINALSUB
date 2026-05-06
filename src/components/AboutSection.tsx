@@ -26,7 +26,7 @@ const AboutSection = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-bold text-engineering-navy mb-6 uppercase tracking-tight">
             Why Choose
-            <span className="block text-primary">AQUA</span>
+            <span className="block text-primary">DOSITA</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Three decades of engineering water treatment solutions for businesses 

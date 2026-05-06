@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import dositaLogo from "@/assets/dosita-logo.svg";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,9 +51,7 @@ const Navigation = () => {
 
           {/* Logo - Centered */}
           <div className="flex items-center justify-center">
-            <div className="text-3xl font-bold text-white tracking-wider">
-              AQUA
-            </div>
+            <img src={dositaLogo} alt="Dosita" className="h-12 w-auto brightness-0 invert" />
           </div>
 
           {/* Desktop Navigation - Right Side */}
