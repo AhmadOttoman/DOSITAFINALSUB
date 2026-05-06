@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 140" width="100%" height="100%">
+  <!-- Transparent Background is default in SVG -->
+  <defs>
+    <style>
+      .dosita-text {
+        font-family: 'Georgia', 'Times New Roman', serif;
+        font-weight: 900;
+        font-size: 115px;
+        fill: #243f60;
+        letter-spacing: -2.5px;
+      }
+    </style>
+  </defs>
+
+  <!-- Water Drop Icon -->
+  <g transform="translate(10, 8) scale(1.05)">
+    <!-- Left Dark Blue -->
+    <path d="M 45 5 C 10 35 -5 65 10 90 C 15 105 25 115 40 115 C 15 85 15 45 45 5 Z" fill="#243f60" />
+    
+    <!-- Middle Teal -->
+    <path d="M 52 20 C 25 60 25 95 46 115 C 55 115 65 108 70 98 C 40 80 40 45 52 20 Z" fill="#0a8385" />
+
+    <!-- Right Light Blue -->
+    <path d="M 60 30 C 45 55 45 85 75 95 C 95 80 90 45 60 30 Z" fill="#74ccce" />
+  </g>
+  
+  <!-- Wordmark -->
+  <text x="120" y="115" class="dosita-text">Dosita</text>
+</svg>
