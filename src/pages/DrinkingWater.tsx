@@ -33,7 +33,7 @@ const DrinkingWater = () => {
             {drinkingWaterProducts.map((product) => (
               <Card 
                 key={product.id}
-                className="group hover:shadow-professional transition-all duration-300 hover:-translate-y-2 border-0 shadow-card bg-gradient-to-br from-card to-secondary/20"
+                className="group hover:shadow-professional transition-all duration-300 hover:-translate-y-2 border-0 shadow-card bg-gradient-to-br from-card to-secondary/20 flex flex-col"
               >
                 <CardHeader className="pb-4">
                   <div className="relative h-48 rounded-lg overflow-hidden mb-4">
@@ -52,14 +52,14 @@ const DrinkingWater = () => {
                   </CardTitle>
                 </CardHeader>
                 
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-6 flex flex-col flex-grow">
                   <p className="text-muted-foreground leading-relaxed">
                     {product.description}
                   </p>
                   
                   <Button 
                     variant="industrial" 
-                    className="w-full group-hover:bg-primary group-hover:text-white"
+                    className="w-full group-hover:bg-primary group-hover:text-white mt-auto"
                     asChild
                   >
                     <Link to={`/products/${product.id}`}>

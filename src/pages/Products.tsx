@@ -50,7 +50,7 @@ const Products = () => {
             {categories.map((category) => (
               <Card 
                 key={category.id}
-                className="group hover:shadow-professional transition-all duration-300 hover:-translate-y-2 border-0 shadow-card bg-gradient-to-br from-card to-secondary/20"
+                className="group hover:shadow-professional transition-all duration-300 hover:-translate-y-2 border-0 shadow-card bg-gradient-to-br from-card to-secondary/20 flex flex-col"
               >
                 <CardHeader className="pb-4">
                   <div className="flex items-center justify-center mb-6 p-8 bg-secondary/50 rounded-lg">
@@ -61,14 +61,14 @@ const Products = () => {
                   </CardTitle>
                 </CardHeader>
                 
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-6 flex flex-col flex-grow">
                   <p className="text-muted-foreground leading-relaxed text-center">
                     {category.description}
                   </p>
                   
                   <Button 
                     variant="industrial" 
-                    className="w-full group-hover:bg-primary group-hover:text-white"
+                    className="w-full group-hover:bg-primary group-hover:text-white mt-auto"
                     asChild
                   >
                     <Link to={category.path}>
