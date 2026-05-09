@@ -55,7 +55,7 @@ const ProductsSection = () => {
             <CarouselContent className="-ml-2 md:-ml-4">
               {allProducts.map((product) => (
                 <CarouselItem key={product.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-                  <Card className="group hover:shadow-professional transition-all duration-300 hover:-translate-y-2 border-0 shadow-card bg-gradient-to-br from-card to-secondary/20 h-full">
+                  <Card className="group hover:shadow-professional transition-all duration-300 hover:-translate-y-2 border-0 shadow-card bg-gradient-to-br from-card to-secondary/20 h-full flex flex-col">
                     <CardHeader className="pb-4">
                       <div className="relative h-48 rounded-lg overflow-hidden mb-4">
                         <img 
@@ -73,7 +73,7 @@ const ProductsSection = () => {
                       </CardTitle>
                     </CardHeader>
                     
-                    <CardContent className="space-y-4">
+                    <CardContent className="space-y-4 flex flex-col flex-grow">
                       <p className="text-muted-foreground leading-relaxed">
                         {product.description}
                       </p>
@@ -89,7 +89,7 @@ const ProductsSection = () => {
                       
                       <Button 
                         variant="industrial" 
-                        className="w-full group-hover:bg-primary group-hover:text-white"
+                        className="w-full group-hover:bg-primary group-hover:text-white mt-auto"
                         asChild
                       >
                         <Link to={`/products/${product.id}`}>
