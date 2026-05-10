@@ -32,13 +32,9 @@ const ProductsSection = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-bold text-engineering-navy mb-6 uppercase tracking-tight">
-            Our Products
+            Products
             <span className="block text-primary">Excellence In Every Detail</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Three decades of engineering excellence in water treatment, 
-            disinfection, and aquatic systems.
-          </p>
         </div>
 
         <div className="relative">

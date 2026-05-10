@@ -12,12 +12,18 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+const routerBasename = (() => {
+  const raw = import.meta.env.BASE_URL;
+  if (!raw || raw === "/" || raw === "./") return undefined;
+  return raw.endsWith("/") ? raw.slice(0, -1) : raw;
+})();
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename={routerBasename}>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/products" element={<Products />} />

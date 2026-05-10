@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { MapPin, Phone, Send } from "lucide-react";
 
 const ContactSection = () => {
   return (
@@ -15,8 +15,7 @@ const ContactSection = () => {
             <span className="block text-primary">Touch</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Ready to engineer the perfect water solution for your business? 
-            Our experts are here to help.
+            Contact our offices in Turkiye, Italy, and the U.A.E.
           </p>
         </div>
 
@@ -78,59 +77,56 @@ const ContactSection = () => {
           {/* Contact Information */}
           <div className="space-y-8">
             <Card className="shadow-card border-0 bg-gradient-to-br from-card to-secondary/20">
-              <CardContent className="pt-6">
-                <div className="flex items-start space-x-4">
-                  <div className="p-3 bg-primary/10 rounded-full">
-                    <Mail className="h-6 w-6 text-primary" />
+              <CardContent className="pt-6 space-y-6">
+                <h3 className="text-2xl font-semibold text-engineering-navy">Contact</h3>
+
+                <div className="rounded-xl border border-border/70 bg-background/60 p-5">
+                  <div className="flex items-start gap-3 mb-3">
+                    <MapPin className="h-5 w-5 text-primary mt-0.5" />
+                    <p className="font-semibold text-engineering-navy">
+                      Dosita Havuz Ve Su Teknolojileri Ltd. Sti.
+                    </p>
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-engineering-navy">Email Us</h3>
-                    <p className="text-muted-foreground">sales@pool.com</p>
-                    <p className="text-muted-foreground">engineering@pool.com</p>
+                  <p className="text-muted-foreground mb-3">
+                    Ciftlik, Bilgin Caddesi No 34, 41650 Golcuk Kocaeli - Turkiye
+                  </p>
+                  <div className="flex items-center gap-2 text-engineering-navy font-medium">
+                    <Phone className="h-4 w-4 text-primary" />
+                    <span>+90 262 5023097</span>
+                  </div>
+                </div>
+
+                <div className="rounded-xl border border-border/70 bg-background/60 p-5">
+                  <div className="flex items-start gap-3 mb-3">
+                    <MapPin className="h-5 w-5 text-primary mt-0.5" />
+                    <p className="font-semibold text-engineering-navy">Dosita S.R.L.</p>
+                  </div>
+                  <p className="text-muted-foreground mb-3">
+                    V. Dottor Renato Balducci, 39, 02043, Contigliano Rieti - Italy
+                  </p>
+                  <div className="flex items-center gap-2 text-engineering-navy font-medium">
+                    <Phone className="h-4 w-4 text-primary" />
+                    <span>+39 393 8917942</span>
+                  </div>
+                </div>
+
+                <div className="rounded-xl border border-border/70 bg-background/60 p-5">
+                  <div className="flex items-start gap-3 mb-3">
+                    <MapPin className="h-5 w-5 text-primary mt-0.5" />
+                    <p className="font-semibold text-engineering-navy">
+                      Dosita Havuz Havuz Middle East F.Z.E.
+                    </p>
+                  </div>
+                  <p className="text-muted-foreground mb-3">
+                    U.A.E., Sharjah, SAIF Zone, Q9-01, P.O. Box 9430
+                  </p>
+                  <div className="flex items-center gap-2 text-engineering-navy font-medium">
+                    <Phone className="h-4 w-4 text-primary" />
+                    <span>+971 50 3701692</span>
                   </div>
                 </div>
               </CardContent>
             </Card>
-
-            <Card className="shadow-card border-0 bg-gradient-to-br from-card to-secondary/20">
-              <CardContent className="pt-6">
-                <div className="flex items-start space-x-4">
-                  <div className="p-3 bg-primary/10 rounded-full">
-                    <Phone className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-engineering-navy">Call Us</h3>
-                    <p className="text-muted-foreground">+1 (555) 123-4567</p>
-                    <p className="text-muted-foreground text-sm">Mon-Fri 8AM-6PM EST</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="shadow-card border-0 bg-gradient-to-br from-card to-secondary/20">
-              <CardContent className="pt-6">
-                <div className="flex items-start space-x-4">
-                  <div className="p-3 bg-primary/10 rounded-full">
-                    <MapPin className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-engineering-navy">Visit Us</h3>
-                    <p className="text-muted-foreground">1234 Industrial Drive</p>
-                    <p className="text-muted-foreground">Engineering City, EC 12345</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <div className="bg-gradient-to-r from-aqua-teal to-primary text-white p-8 rounded-xl shadow-hero">
-              <h3 className="font-semibold mb-2 text-lg uppercase">Need an Urgent Quote?</h3>
-              <p className="text-white/90 text-sm mb-4">
-                Our engineering team is standing by for emergency water treatment needs.
-              </p>
-              <Button variant="default" size="sm" className="bg-white text-primary hover:bg-white/90">
-                Emergency Contact
-              </Button>
-            </div>
           </div>
         </div>
       </div>

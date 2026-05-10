@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { ProductImageGallery } from "@/components/ProductImageGallery";
 import { ArrowLeft } from "lucide-react";
 import { drinkingWaterProducts, swimmingPoolProducts } from "@/data/productsData.tsx";
 
@@ -127,27 +128,10 @@ const ProductDetail = () => {
             {/* Product Images Section */}
             <section>
               <h2 className="text-3xl font-bold text-engineering-navy mb-6">Product Images</h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                {/* Main Product Image */}
-                <div className="relative rounded-xl overflow-hidden shadow-professional">
-                  <img 
-                    src={product.image} 
-                    alt={product.title}
-                    className="w-full h-auto object-cover"
-                  />
-                </div>
-                
-                {/* Additional Images */}
-                {product.productImages && product.productImages.map((img, index) => (
-                  <div key={index} className="relative rounded-xl overflow-hidden shadow-professional">
-                    <img 
-                      src={img} 
-                      alt={`${product.title} - Image ${index + 2}`}
-                      className="w-full h-auto object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
+              <ProductImageGallery
+                images={[product.image, ...(product.productImages ?? [])]}
+                productTitle={product.title}
+              />
             </section>
 
             {/* CTA Button */}

@@ -36,11 +36,11 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm shadow-md border-b border-border">
+    <nav className="fixed top-0 z-[100] w-full border-b border-border bg-white/95 shadow-md backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-center h-20 relative">
           {/* Desktop Navigation - Left Side */}
-          <div className="hidden lg:flex items-center space-x-8 absolute left-0">
+          <div className="hidden lg:flex items-center space-x-8 absolute left-0 z-0">
             <a href="#home" onClick={() => handleNavClick("home")} className="text-engineering-navy hover:text-primary transition-colors font-medium">
               Home
             </a>
@@ -49,13 +49,22 @@ const Navigation = () => {
             </a>
           </div>
 
-          {/* Logo - Centered */}
-          <div className="flex items-center justify-center">
-            <img src={dositaLogo} alt="Dosita" className="h-12 w-auto" />
-          </div>
+          {/* Logo — homepage (above toast viewport layer when toasts overlap) */}
+          <Link
+            to="/"
+            onClick={() => {
+              setIsMenuOpen(false);
+              setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }, 100);
+            }}
+            className="relative z-[110] flex cursor-pointer items-center justify-center rounded-sm outline-none ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          >
+            <img src={dositaLogo} alt="Dosita" className="pointer-events-none h-12 w-auto select-none" draggable={false} />
+          </Link>
 
           {/* Desktop Navigation - Right Side */}
-          <div className="hidden lg:flex items-center space-x-8 absolute right-0">
+          <div className="absolute right-0 z-0 hidden lg:flex lg:items-center lg:space-x-8">
             <a href="#about" onClick={() => handleNavClick("about")} className="text-engineering-navy hover:text-primary transition-colors font-medium">
               About
             </a>
@@ -65,7 +74,7 @@ const Navigation = () => {
           </div>
 
           {/* Mobile menu button */}
-          <div className="lg:hidden absolute right-0">
+          <div className="absolute right-0 z-[120] lg:hidden">
             <Button
               variant="ghost"
               size="icon"

@@ -10,14 +10,12 @@ const Products = () => {
     {
       id: "drinking-water",
       title: "Drinking Water",
-      description: "Advanced water treatment systems for safe and pure drinking water. Our solutions include copper-silver ionization and UV disinfection systems.",
       path: "/products/drinking-water",
       icon: <Droplets className="h-12 w-12 text-primary" />
     },
     {
       id: "swimming-pool",
       title: "Swimming Pool Products",
-      description: "Complete range of professional swimming pool equipment including UV systems, pumps, heaters, chemical dosing, filtration systems, and accessories.",
       path: "/products/swimming-pool",
       icon: <Waves className="h-12 w-12 text-primary" />
     }
@@ -35,10 +33,6 @@ const Products = () => {
               Professional Equipment
               <span className="block text-primary">Complete Solutions</span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
-              Discover our comprehensive range of water treatment and aquatic systems. 
-              Three decades of engineering excellence delivering reliable solutions for every application.
-            </p>
           </div>
         </div>
       </section>
@@ -62,10 +56,6 @@ const Products = () => {
                 </CardHeader>
                 
                 <CardContent className="space-y-6 flex flex-col flex-grow">
-                  <p className="text-muted-foreground leading-relaxed text-center">
-                    {category.description}
-                  </p>
-                  
                   <Button 
                     variant="industrial" 
                     className="w-full group-hover:bg-primary group-hover:text-white mt-auto"
