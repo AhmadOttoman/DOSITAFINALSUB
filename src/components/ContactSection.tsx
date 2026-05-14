@@ -33,7 +33,7 @@ const ContactSection = () => {
                   <Label htmlFor="name">Full Name</Label>
                   <Input 
                     id="name" 
-                    placeholder="John Doe"
+                    placeholder="Full Name"
                     className="border-border focus:ring-primary"
                   />
                 </div>
@@ -52,7 +52,7 @@ const ContactSection = () => {
                 <Input 
                   id="email" 
                   type="email"
-                  placeholder="john@company.com"
+                  placeholder="email@company.com"
                   className="border-border focus:ring-primary"
                 />
               </div>
@@ -61,7 +61,7 @@ const ContactSection = () => {
                 <Label htmlFor="message">Message</Label>
                 <Textarea 
                   id="message"
-                  placeholder="Tell us about your water treatment requirements..."
+                  placeholder="Message"
                   rows={5}
                   className="border-border focus:ring-primary"
                 />

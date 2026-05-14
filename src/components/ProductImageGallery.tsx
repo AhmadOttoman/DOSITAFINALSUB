@@ -79,9 +79,7 @@ function FullscreenViewer({
       <div className="absolute inset-0 bg-black/93 backdrop-blur-[2px]" aria-hidden />
 
       <div className="relative flex h-[100dvh] w-full flex-col overflow-hidden pb-[max(1rem,env(safe-area-inset-bottom,0px))] pl-3 pt-[max(0.75rem,env(safe-area-inset-top,0px))] pr-3 sm:pb-[max(1.5rem,env(safe-area-inset-bottom,0px))] sm:pl-14 sm:pr-14">
-        {/* Image stage — fullscreen within viewport */}
         <div className="relative mx-auto flex min-h-0 max-h-[100dvh] w-full flex-1 items-center justify-center">
-          {/* Exit — top-right corner of the image area */}
           <div className="pointer-events-none absolute right-1 top-1 z-[330] sm:right-6 sm:top-6">
             <Button
               type="button"
@@ -97,7 +95,6 @@ function FullscreenViewer({
             </Button>
           </div>
 
-          {/* Compact close on small screens (primary exit stays top-right) */}
           <Button
             type="button"
             size="icon"
@@ -169,12 +166,24 @@ export function ProductImageGallery({
 }: ProductImageGalleryProps) {
   const slides = React.useMemo(() => images.filter(Boolean), [images]);
 
-  const [carouselApi, setCarouselApi] = React.useState<CarouselApi>();
   const [selected, setSelected] = React.useState(0);
   const [fullscreen, setFullscreen] = React.useState<{
     index: number;
     key: number;
   } | null>(null);
+  const mobileStripRef = React.useRef<HTMLDivElement>(null);
+  const touchStartX = React.useRef<number | null>(null);
+
+  React.useEffect(() => {
+    setSelected((i) => (slides.length ? Math.min(i, slides.length - 1) : 0));
+  }, [slides.length]);
+
+  React.useEffect(() => {
+    const strip = mobileStripRef.current;
+    if (!strip) return;
+    const el = strip.querySelector<HTMLElement>(`[data-thumb-index="${selected}"]`);
+    el?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  }, [selected]);
 
   const openFullscreen = React.useCallback((imageIndex: number) => {
     setFullscreen((prev) => ({
@@ -183,188 +192,231 @@ export function ProductImageGallery({
     }));
   }, []);
 
-  const scrollCarouselTo = React.useCallback(
-    (index: number) => {
-      if (!slides.length || index < 0 || index >= slides.length) return;
-      setSelected(index);
-      carouselApi?.scrollTo(index);
-    },
-    [carouselApi, slides.length]
-  );
+  const goPrev = React.useCallback(() => {
+    if (slides.length < 2) return;
+    setSelected((i) => (i - 1 + slides.length) % slides.length);
+  }, [slides.length]);
+
+  const goNext = React.useCallback(() => {
+    if (slides.length < 2) return;
+    setSelected((i) => (i + 1) % slides.length);
+  }, [slides.length]);
 
   React.useEffect(() => {
-    if (!carouselApi) return;
-
-    const onSelect = () => {
-      const i = carouselApi.selectedScrollSnap();
-      setSelected(i);
+    const onKey = (e: KeyboardEvent) => {
+      if (fullscreen) return;
+      const t = e.target as HTMLElement | null;
+      if (t?.closest?.("input, textarea, select, [contenteditable=true]")) return;
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        goPrev();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        goNext();
+      }
     };
-
-    carouselApi.on("select", onSelect);
-    carouselApi.on("reInit", onSelect);
-    onSelect();
-
-    return () => {
-      carouselApi.off("select", onSelect);
-      carouselApi.off("reInit", onSelect);
-    };
-  }, [carouselApi]);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [fullscreen, goPrev, goNext]);
 
   if (!slides.length) return null;
 
   const hasMultiple = slides.length > 1;
-  const thumbButtonClass =
-    "relative aspect-square w-full shrink-0 overflow-hidden rounded-lg border bg-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
+  const currentSrc = slides[selected];
+
+  const thumbClass = (active: boolean) =>
+    cn(
+      "relative shrink-0 overflow-hidden rounded border bg-white transition-all outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1",
+      active
+        ? "border-engineering-navy ring-2 ring-engineering-navy/15 ring-offset-1"
+        : "border-border/80 hover:border-muted-foreground/40"
+    );
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0]?.clientX ?? null;
+  };
+
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const start = touchStartX.current;
+    touchStartX.current = null;
+    if (start == null || slides.length < 2) return;
+    const end = e.changedTouches[0]?.clientX ?? start;
+    const dx = end - start;
+    if (Math.abs(dx) < 48) return;
+    if (dx < 0) goNext();
+    else goPrev();
+  };
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
-        <div className="hidden flex-col gap-2 overflow-y-auto pr-1 lg:flex lg:w-24 lg:flex-shrink-0 lg:self-stretch lg:max-h-[min(520px,calc(100vh-12rem))]">
-          {slides.map((src, i) => (
-            <div key={`dt-${src}-${i}`} className="relative">
+    <div className="space-y-3">
+      {/* Shopify-style: vertical thumbs (desktop) + main media */}
+      <div
+        className="flex flex-col gap-3 lg:flex-row lg:items-start lg:gap-3"
+        role="region"
+        aria-label={`${productTitle} product images`}
+      >
+        {/* Desktop: vertical thumbnail rail (left, Dawn-style) */}
+        {hasMultiple ? (
+          <div
+            className="hidden lg:flex w-16 shrink-0 flex-col gap-2 overflow-y-auto py-0.5 pr-1 max-h-[min(560px,65vh)]"
+            role="tablist"
+            aria-label="Product image thumbnails"
+          >
+            {slides.map((src, i) => (
               <button
+                key={`thumb-${i}`}
                 type="button"
-                aria-label={`View image ${i + 1} in carousel`}
-                onClick={() => scrollCarouselTo(i)}
-                className={cn(
-                  thumbButtonClass,
-                  selected === i
-                    ? "border-primary ring-2 ring-primary"
-                    : "border-border hover:border-muted-foreground/40"
-                )}
+                role="tab"
+                aria-selected={selected === i}
+                aria-label={`Image ${i + 1} of ${slides.length}`}
+                onClick={() => setSelected(i)}
+                className={cn(thumbClass(selected === i), "aspect-square w-14")}
               >
                 <img
                   src={src}
                   alt=""
                   draggable={false}
-                  className="pointer-events-none h-full w-full object-cover"
+                  className="h-full w-full object-cover"
                 />
               </button>
-              <button
-                type="button"
-                aria-label={`Open image ${i + 1} fullscreen`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  scrollCarouselTo(i);
-                  openFullscreen(i);
-                }}
-                className="absolute bottom-1 right-1 flex h-7 w-7 items-center justify-center rounded-md border border-border/80 bg-background/95 shadow-sm outline-none backdrop-blur-sm transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                <Maximize2 className="h-3.5 w-3.5 shrink-0" aria-hidden />
-              </button>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : null}
 
+        {/* Main media — square canvas, white bg, swipe on touch */}
         <div className="relative min-w-0 flex-1">
-          <Carousel
-            setApi={setCarouselApi}
-            opts={{
-              align: "start",
-              loop: hasMultiple,
-            }}
-            className="w-full rounded-xl bg-muted/40 shadow-professional outline outline-1 outline-border/70"
+          <div
+            className={cn(
+              "relative aspect-square w-full overflow-hidden rounded-md border border-border/60 bg-white",
+              "shadow-[0_1px_2px_rgba(0,0,0,0.06)]"
+            )}
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
           >
-            <CarouselContent className="-ml-0">
-              {slides.map((src, i) => (
-                <CarouselItem key={`main-${src}-${i}`} className="basis-full pl-0">
-                  <button
-                    type="button"
-                    onClick={() => openFullscreen(i)}
-                    aria-label={`View ${productTitle} image ${i + 1} fullscreen`}
-                    className="relative block aspect-[4/3] w-full cursor-zoom-in outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 max-sm:aspect-square"
-                  >
-                    <img
-                      src={src}
-                      alt={`${productTitle} — image ${i + 1}`}
-                      draggable={false}
-                      className="h-full w-full object-contain p-6 sm:p-8"
-                    />
-                    <span className="pointer-events-none absolute bottom-3 right-3 flex items-center gap-1 rounded-md border border-border/80 bg-background/90 px-2 py-1 text-xs font-medium text-muted-foreground shadow-sm">
-                      <Maximize2 className="h-3 w-3" aria-hidden />
-                      Fullscreen
-                    </span>
-                  </button>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
+            <button
+              type="button"
+              onClick={() => openFullscreen(selected)}
+              className="group absolute inset-0 flex cursor-zoom-in items-center justify-center outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
+              aria-label={`Open image ${selected + 1} in full screen`}
+            >
+              <img
+                key={currentSrc}
+                src={currentSrc}
+                alt={`${productTitle} — product image ${selected + 1}`}
+                draggable={false}
+                className="max-h-full max-w-full object-contain p-4 transition-transform duration-300 ease-out group-hover:scale-[1.03]"
+              />
+              <span className="pointer-events-none absolute right-2.5 top-2.5 flex items-center gap-1 rounded border border-border/70 bg-white/95 px-2 py-1 text-[11px] font-medium text-muted-foreground shadow-sm md:text-xs">
+                <Maximize2 className="h-3 w-3 shrink-0" aria-hidden />
+                Click to expand
+              </span>
+            </button>
+
             {hasMultiple ? (
               <>
-                <CarouselPrevious
-                  variant="secondary"
-                  className="-left-1 top-1/2 z-10 h-10 w-10 -translate-y-1/2 rounded-full border-border bg-background/95 shadow-card hover:bg-background sm:left-4"
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goPrev();
+                  }}
+                  className="absolute left-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-border/80 bg-white/95 text-engineering-navy shadow-sm transition-colors hover:bg-white md:left-3 md:h-10 md:w-10"
                   aria-label="Previous image"
-                />
-                <CarouselNext
-                  variant="secondary"
-                  className="-right-1 top-1/2 z-10 h-10 w-10 -translate-y-1/2 rounded-full border-border bg-background/95 shadow-card hover:bg-background sm:right-4"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goNext();
+                  }}
+                  className="absolute right-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-border/80 bg-white/95 text-engineering-navy shadow-sm transition-colors hover:bg-white md:right-3 md:h-10 md:w-10"
                   aria-label="Next image"
-                />
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </button>
               </>
             ) : null}
-          </Carousel>
+          </div>
+
+          {/* Mobile: dot indicators (Shopify-style) */}
+          {hasMultiple ? (
+            <div
+              className="mt-3 flex justify-center gap-1.5 lg:hidden"
+              role="tablist"
+              aria-label="Select product image"
+            >
+              {slides.map((_, i) => (
+                <button
+                  key={`dot-${i}`}
+                  type="button"
+                  role="tab"
+                  aria-selected={selected === i}
+                  aria-label={`Show image ${i + 1}`}
+                  onClick={() => setSelected(i)}
+                  className={cn(
+                    "h-2 w-2 rounded-full transition-all",
+                    selected === i
+                      ? "w-5 bg-engineering-navy"
+                      : "bg-border hover:bg-muted-foreground/40"
+                  )}
+                />
+              ))}
+            </div>
+          ) : null}
+
+          <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-sm text-muted-foreground">
+            {hasMultiple ? (
+              <span className="tabular-nums">
+                {selected + 1} / {slides.length}
+              </span>
+            ) : (
+              <span />
+            )}
+            <button
+              type="button"
+              onClick={() => openFullscreen(selected)}
+              className="text-engineering-navy underline-offset-4 hover:text-primary hover:underline"
+            >
+              Open media gallery
+            </button>
+          </div>
         </div>
       </div>
 
+      {/* Mobile / tablet: horizontal thumbnail strip */}
       {hasMultiple ? (
-        <div className="relative lg:hidden">
-          <Carousel
-            opts={{
-              align: "start",
-              dragFree: true,
-              containScroll: "trimSnaps",
-            }}
-            className="w-full px-10"
+        <div className="lg:hidden">
+          <p className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            More images
+          </p>
+          <div
+            ref={mobileStripRef}
+            className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            role="tablist"
+            aria-label="Product image thumbnails"
           >
-            <CarouselContent className="-ml-2">
-              {slides.map((src, i) => (
-                <CarouselItem key={`mb-${src}-${i}`} className="basis-[92px] pl-2">
-                  <div className="relative w-[84px]">
-                    <button
-                      type="button"
-                      aria-label={`View image ${i + 1} in carousel`}
-                      onClick={() => scrollCarouselTo(i)}
-                      className={cn(
-                        "aspect-square w-full overflow-hidden rounded-md border bg-background outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
-                        selected === i
-                          ? "border-primary ring-2 ring-primary"
-                          : "border-border"
-                      )}
-                    >
-                      <img
-                        src={src}
-                        alt=""
-                        draggable={false}
-                        className="pointer-events-none h-full w-full object-cover"
-                      />
-                    </button>
-                    <button
-                      type="button"
-                      aria-label={`Open image ${i + 1} fullscreen`}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        scrollCarouselTo(i);
-                        openFullscreen(i);
-                      }}
-                      className="absolute bottom-0.5 right-0.5 flex h-6 w-6 items-center justify-center rounded border border-border/80 bg-background/95 shadow-sm outline-none backdrop-blur-sm hover:bg-primary hover:text-primary-foreground focus-visible:ring-2 focus-visible:ring-ring"
-                    >
-                      <Maximize2 className="h-3 w-3 shrink-0" aria-hidden />
-                    </button>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious
-              variant="outline"
-              className="-left-1 h-9 w-9 rounded-full border-border bg-background/95 opacity-95 shadow-sm"
-              aria-label="Thumbnail strip previous"
-            />
-            <CarouselNext
-              variant="outline"
-              className="-right-1 h-9 w-9 rounded-full border-border bg-background/95 opacity-95 shadow-sm"
-              aria-label="Thumbnail strip next"
-            />
-          </Carousel>
+            {slides.map((src, i) => (
+              <button
+                key={`thumb-m-${i}`}
+                type="button"
+                role="tab"
+                data-thumb-index={i}
+                aria-selected={selected === i}
+                aria-label={`Image ${i + 1} of ${slides.length}`}
+                onClick={() => setSelected(i)}
+                className={cn(thumbClass(selected === i), "h-16 w-16 shrink-0")}
+              >
+                <img
+                  src={src}
+                  alt=""
+                  draggable={false}
+                  className="h-full w-full object-cover"
+                />
+              </button>
+            ))}
+          </div>
         </div>
       ) : null}
 

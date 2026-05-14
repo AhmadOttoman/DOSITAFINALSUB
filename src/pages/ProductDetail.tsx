@@ -1,15 +1,24 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { ProductImageGallery } from "@/components/ProductImageGallery";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Minus, Plus } from "lucide-react";
 import { drinkingWaterProducts, swimmingPoolProducts } from "@/data/productsData.tsx";
 
 const ProductDetail = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
+  const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    setQuantity(1);
+  }, [productId]);
 
   const allProducts = [...drinkingWaterProducts, ...swimmingPoolProducts];
   const product = allProducts.find(p => p.id === productId);
@@ -46,21 +55,89 @@ const ProductDetail = () => {
           </Button>
 
           <div className="space-y-12">
-            {/* Header with Title and Icon */}
-            <div className="flex items-center gap-4 mb-6">
-              {product.icon}
-              <h1 className="text-4xl md:text-5xl font-bold text-engineering-navy">
-                {product.title}
-              </h1>
-            </div>
+            {/* Shopify-style: media + product summary side by side on large screens */}
+            <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
+              <div className="min-w-0 lg:sticky lg:top-24 lg:self-start">
+                <h2 className="sr-only">Product images</h2>
+                <ProductImageGallery
+                  images={[product.image, ...(product.productImages ?? [])]}
+                  productTitle={product.title}
+                />
+              </div>
 
-            {/* Introduction Section */}
-            <section>
-              <h2 className="text-3xl font-bold text-engineering-navy mb-4">Introduction</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                {product.introduction || product.description}
-              </p>
-            </section>
+              <div className="space-y-8">
+                <div className="flex items-start gap-4">
+                  <div className="mt-1 shrink-0">{product.icon}</div>
+                  <h1 className="text-3xl font-bold leading-tight text-engineering-navy md:text-4xl lg:text-5xl">
+                    {product.title}
+                  </h1>
+                </div>
+
+                <section>
+                  <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+                    Overview
+                  </h2>
+                  <p className="text-base leading-relaxed text-muted-foreground md:text-lg">
+                    {product.introduction || product.description}
+                  </p>
+                </section>
+
+                {/* Shopify-style product form / options block */}
+                <div className="rounded-lg border border-border bg-card p-5 shadow-sm sm:p-6">
+                  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    Availability
+                  </p>
+                  <p className="mt-1 text-sm font-medium text-engineering-navy">Contact for lead time</p>
+
+                  <Separator className="my-5" />
+
+                  <div className="space-y-2">
+                    <Label htmlFor="product-qty" className="text-sm font-medium text-engineering-navy">
+                      Quantity
+                    </Label>
+                    <div className="flex max-w-[11rem] items-stretch gap-0 rounded-md border border-input bg-background">
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        className="h-11 shrink-0 rounded-none border-r border-input"
+                        aria-label="Decrease quantity"
+                        onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                      >
+                        <Minus className="h-4 w-4" />
+                      </Button>
+                      <Input
+                        id="product-qty"
+                        type="number"
+                        min={1}
+                        max={999}
+                        value={quantity}
+                        onChange={(e) => {
+                          const v = parseInt(e.target.value, 10);
+                          if (Number.isNaN(v)) setQuantity(1);
+                          else setQuantity(Math.min(999, Math.max(1, v)));
+                        }}
+                        className="h-11 border-0 text-center text-base font-medium shadow-none focus-visible:ring-0"
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        className="h-11 shrink-0 rounded-none border-l border-input"
+                        aria-label="Increase quantity"
+                        onClick={() => setQuantity((q) => Math.min(999, q + 1))}
+                      >
+                        <Plus className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+
+                  <Button variant="industrial" size="lg" className="mt-6 w-full sm:h-12">
+                    Request quote
+                  </Button>
+                </div>
+              </div>
+            </div>
 
             {/* Specifications Section */}
             <section>
@@ -85,14 +162,22 @@ const ProductDetail = () => {
                 <h2 className="text-3xl font-bold text-engineering-navy mb-6">Certifications</h2>
                 <Card className="border-0 shadow-card bg-gradient-to-br from-card to-secondary/20">
                   <CardContent className="pt-6">
-                    <ul className="space-y-3">
+                    <div className="space-y-3">
                       {product.certifications.map((cert, index) => (
-                        <li key={index} className="flex items-start text-foreground">
-                          <div className="w-2 h-2 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></div>
-                          <span>{cert}</span>
-                        </li>
+                        <a
+                          key={index}
+                          href={cert.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-between p-4 rounded-lg bg-background/50 hover:bg-background transition-colors group"
+                        >
+                          <span className="font-medium text-foreground group-hover:text-primary transition-colors">
+                            {cert.title}
+                          </span>
+                          <ArrowLeft className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors rotate-180" />
+                        </a>
                       ))}
-                    </ul>
+                    </div>
                   </CardContent>
                 </Card>
               </section>
@@ -124,26 +209,6 @@ const ProductDetail = () => {
                 </Card>
               </section>
             )}
-
-            {/* Product Images Section */}
-            <section>
-              <h2 className="text-3xl font-bold text-engineering-navy mb-6">Product Images</h2>
-              <ProductImageGallery
-                images={[product.image, ...(product.productImages ?? [])]}
-                productTitle={product.title}
-              />
-            </section>
-
-            {/* CTA Button */}
-            <div className="pt-6">
-              <Button 
-                variant="industrial" 
-                size="lg"
-                className="w-full md:w-auto"
-              >
-                Request Quote
-              </Button>
-            </div>
           </div>
         </div>
       </section>

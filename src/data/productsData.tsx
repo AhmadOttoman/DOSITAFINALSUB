@@ -18,7 +18,7 @@ export interface Product {
   features: string[];
   specifications: Record<string, string>;
   introduction?: string;
-  certifications?: string[];
+  certifications?: { title: string; url: string }[];
   manuals?: { title: string; url: string }[];
   productImages?: string[];
 }
@@ -39,23 +39,22 @@ export const drinkingWaterProducts: Product[] = [
       "Real-time performance tracking"
     ],
     specifications: {
-      "UV Dose": "30-300 mJ/cm²",
-      "Lamp Type": "Low/Medium pressure",
-      "Power": "120-480V available",
-      "Material": "316L stainless steel"
+      "Lamps": "Our product range utilizes the low-pressure lamps.",
+      "Dosage": "The dosage of our product range is (30 – 40) mJ/cm².",
+      "Tested pressure": "The tested pressure is 10 bars for the UVSafe range.",
+      "UV lamp life": "The expected life of the UV lamps is (8,000 – 10,000) hours.",
+      "Accessories": "Our product range includes UV intensity monitoring.",
+      "Options": "Optional features include BMS, flow switches and an hour counter.",
     },
     introduction: "Our UV Systems represent the cutting edge of water disinfection technology, providing reliable, chemical-free treatment for drinking water applications. Using powerful UV-C light, these systems effectively eliminate bacteria, viruses, and other pathogens without altering the taste or chemistry of your water.",
     certifications: [
-      "NSF/ANSI Standard 55 - UV Microbiological Water Treatment Systems",
-      "CE Marking - European Conformity",
-      "ISO 9001:2015 Quality Management",
-      "UL Listed - Safety Certification",
-      "DVGW Certified - German Technical and Scientific Association"
+      { title: "ISO 9001:2015", url: "/certifications/dosita-iso-9001-2027.pdf" },
+      { title: "WRAS", url: "/certifications/uv-wras-certificate-2029.pdf" },
+      { title: "UDEM", url: "/certifications/uv-udem-2025.pdf" },
+      { title: "NSF", url: "/certifications/uv-nsf-test-report-2024.pdf" },
     ],
     manuals: [
-      { title: "Installation Manual", url: "/manuals/product-manual.pdf" },
-      { title: "Operation & Maintenance Guide", url: "/manuals/product-manual.pdf" },
-      { title: "Technical Specifications Sheet", url: "/manuals/product-manual.pdf" }
+      { title: "UVSafe Brochure", url: "/manuals/uvisafe-brochure-1-5.pdf" },
     ],
     productImages: [uvSystems, treatmentSystems]
   },
@@ -81,11 +80,11 @@ export const drinkingWaterProducts: Product[] = [
     },
     introduction: "Copper Silver Ionization systems offer a natural, environmentally friendly approach to water treatment. By releasing controlled amounts of copper and silver ions, these systems provide long-lasting sanitization with minimal chemical use, making them ideal for sustainable water management.",
     certifications: [
-      "EPA Registered - Environmental Protection Agency",
-      "NSF/ANSI Standard 61 - Drinking Water System Components",
-      "ISO 14001:2015 Environmental Management",
-      "CE Marking - European Conformity",
-      "WRAS Approved - Water Regulations Advisory Scheme"
+      { title: "EPA Registered - Environmental Protection Agency", url: "/manuals/product-manual.pdf" },
+      { title: "NSF/ANSI Standard 61 - Drinking Water System Components", url: "/manuals/product-manual.pdf" },
+      { title: "ISO 14001:2015 Environmental Management", url: "/manuals/product-manual.pdf" },
+      { title: "CE Marking - European Conformity", url: "/manuals/product-manual.pdf" },
+      { title: "WRAS Approved - Water Regulations Advisory Scheme", url: "/manuals/product-manual.pdf" },
     ],
     manuals: [
       { title: "Installation Guide", url: "/manuals/product-manual.pdf" },
@@ -119,10 +118,10 @@ export const swimmingPoolProducts: Product[] = [
     },
     introduction: "Pool UV Systems deliver superior water quality through advanced ultraviolet technology, reducing chlorine demand and eliminating harmful microorganisms. Perfect for commercial and residential pools seeking eco-friendly water treatment solutions.",
     certifications: [
-      "NSF/ANSI Standard 50 - Pool & Spa Equipment",
-      "CE Marking - European Conformity",
-      "ISO 9001:2015 Quality Management",
-      "UL Listed - Safety Certification"
+      { title: "NSF/ANSI Standard 50 - Pool & Spa Equipment", url: "/manuals/product-manual.pdf" },
+      { title: "CE Marking - European Conformity", url: "/manuals/product-manual.pdf" },
+      { title: "ISO 9001:2015 Quality Management", url: "/manuals/product-manual.pdf" },
+      { title: "UL Listed - Safety Certification", url: "/manuals/product-manual.pdf" },
     ],
     manuals: [
       { title: "Installation Manual", url: "/manuals/product-manual.pdf" },
@@ -153,10 +152,10 @@ export const swimmingPoolProducts: Product[] = [
     },
     introduction: "Copper Silver ionization technology provides a natural alternative to traditional pool chemicals, delivering effective sanitization through mineral ions. This system significantly reduces chlorine usage while maintaining crystal-clear, safe pool water.",
     certifications: [
-      "EPA Registered for Pool Treatment",
-      "NSF/ANSI Standard 50 Certified",
-      "ISO 9001:2015 Quality Management",
-      "CE Marking - European Conformity"
+      { title: "EPA Registered for Pool Treatment", url: "/manuals/product-manual.pdf" },
+      { title: "NSF/ANSI Standard 50 Certified", url: "/manuals/product-manual.pdf" },
+      { title: "ISO 9001:2015 Quality Management", url: "/manuals/product-manual.pdf" },
+      { title: "CE Marking - European Conformity", url: "/manuals/product-manual.pdf" },
     ],
     manuals: [
       { title: "System Installation Guide", url: "/manuals/product-manual.pdf" },
@@ -187,11 +186,11 @@ export const swimmingPoolProducts: Product[] = [
     },
     introduction: "Our swimming pool pumps are engineered for reliability and efficiency, providing optimal water circulation with minimal energy consumption. Variable speed technology ensures whisper-quiet operation while reducing operating costs by up to 80%.",
     certifications: [
-      "Energy Star Certified",
-      "NSF/ANSI Standard 50 Certified",
-      "UL Listed - Safety Standards",
-      "CE Marking - European Conformity",
-      "ISO 9001:2015 Quality Management"
+      { title: "Energy Star Certified", url: "/manuals/product-manual.pdf" },
+      { title: "NSF/ANSI Standard 50 Certified", url: "/manuals/product-manual.pdf" },
+      { title: "UL Listed - Safety Standards", url: "/manuals/product-manual.pdf" },
+      { title: "CE Marking - European Conformity", url: "/manuals/product-manual.pdf" },
+      { title: "ISO 9001:2015 Quality Management", url: "/manuals/product-manual.pdf" },
     ],
     manuals: [
       { title: "Installation Manual", url: "/manuals/product-manual.pdf" },
@@ -222,11 +221,11 @@ export const swimmingPoolProducts: Product[] = [
     },
     introduction: "Electrical pool heaters offer precise temperature control and rapid heating capabilities, ensuring comfortable swimming conditions year-round. Built with premium stainless steel and advanced digital controls for maximum reliability and performance.",
     certifications: [
-      "UL Listed - Electrical Safety",
-      "NSF/ANSI Standard 50 Certified",
-      "CE Marking - European Conformity",
-      "CSA Certified - Canadian Standards",
-      "ISO 9001:2015 Quality Management"
+      { title: "UL Listed - Electrical Safety", url: "/manuals/product-manual.pdf" },
+      { title: "NSF/ANSI Standard 50 Certified", url: "/manuals/product-manual.pdf" },
+      { title: "CE Marking - European Conformity", url: "/manuals/product-manual.pdf" },
+      { title: "CSA Certified - Canadian Standards", url: "/manuals/product-manual.pdf" },
+      { title: "ISO 9001:2015 Quality Management", url: "/manuals/product-manual.pdf" },
     ],
     manuals: [
       { title: "Installation Guide", url: "/manuals/product-manual.pdf" },
@@ -257,11 +256,11 @@ export const swimmingPoolProducts: Product[] = [
     },
     introduction: "Chemical dosing systems provide automated, precise chemical delivery for maintaining optimal pool water chemistry. Advanced control algorithms ensure accurate dosing while minimizing chemical waste and maintaining safe water conditions.",
     certifications: [
-      "NSF/ANSI Standard 50 Certified",
-      "CE Marking - European Conformity",
-      "ISO 9001:2015 Quality Management",
-      "ATEX Certified - Explosive Atmospheres",
-      "FDA Compliant Materials"
+      { title: "NSF/ANSI Standard 50 Certified", url: "/manuals/product-manual.pdf" },
+      { title: "CE Marking - European Conformity", url: "/manuals/product-manual.pdf" },
+      { title: "ISO 9001:2015 Quality Management", url: "/manuals/product-manual.pdf" },
+      { title: "ATEX Certified - Explosive Atmospheres", url: "/manuals/product-manual.pdf" },
+      { title: "FDA Compliant Materials", url: "/manuals/product-manual.pdf" },
     ],
     manuals: [
       { title: "Installation & Setup Guide", url: "/manuals/product-manual.pdf" },
@@ -292,11 +291,11 @@ export const swimmingPoolProducts: Product[] = [
     },
     introduction: "Sand filtration systems deliver exceptional water clarity through proven multi-media filtration technology. Automatic backwash cycles and intelligent controls minimize maintenance while ensuring optimal filtration performance for crystal-clear pool water.",
     certifications: [
-      "NSF/ANSI Standard 50 Certified",
-      "CE Marking - European Conformity",
-      "ISO 9001:2015 Quality Management",
-      "ASME Pressure Vessel Code",
-      "WRAS Approved Materials"
+      { title: "NSF/ANSI Standard 50 Certified", url: "/manuals/product-manual.pdf" },
+      { title: "CE Marking - European Conformity", url: "/manuals/product-manual.pdf" },
+      { title: "ISO 9001:2015 Quality Management", url: "/manuals/product-manual.pdf" },
+      { title: "ASME Pressure Vessel Code", url: "/manuals/product-manual.pdf" },
+      { title: "WRAS Approved Materials", url: "/manuals/product-manual.pdf" },
     ],
     manuals: [
       { title: "Installation Manual", url: "/manuals/product-manual.pdf" },
@@ -327,10 +326,10 @@ export const swimmingPoolProducts: Product[] = [
     },
     introduction: "Our comprehensive range of pool accessories and components ensures your system operates at peak efficiency. From replacement parts to enhancement modules, we provide everything needed for installation, maintenance, and upgrades.",
     certifications: [
-      "NSF/ANSI Standard 50 Certified Components",
-      "CE Marking - European Conformity",
-      "ISO 9001:2015 Quality Management",
-      "RoHS Compliant Materials"
+      { title: "NSF/ANSI Standard 50 Certified Components", url: "/manuals/product-manual.pdf" },
+      { title: "CE Marking - European Conformity", url: "/manuals/product-manual.pdf" },
+      { title: "ISO 9001:2015 Quality Management", url: "/manuals/product-manual.pdf" },
+      { title: "RoHS Compliant Materials", url: "/manuals/product-manual.pdf" },
     ],
     manuals: [
       { title: "Accessories Catalog", url: "/manuals/product-manual.pdf" },
