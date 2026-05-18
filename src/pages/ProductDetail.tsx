@@ -1,24 +1,15 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { ProductImageGallery } from "@/components/ProductImageGallery";
-import { ArrowLeft, Minus, Plus } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { drinkingWaterProducts, swimmingPoolProducts } from "@/data/productsData.tsx";
 
 const ProductDetail = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
-  const [quantity, setQuantity] = useState(1);
-
-  useEffect(() => {
-    setQuantity(1);
-  }, [productId]);
 
   const allProducts = [...drinkingWaterProducts, ...swimmingPoolProducts];
   const product = allProducts.find(p => p.id === productId);
@@ -81,61 +72,6 @@ const ProductDetail = () => {
                     {product.introduction || product.description}
                   </p>
                 </section>
-
-                {/* Shopify-style product form / options block */}
-                <div className="rounded-lg border border-border bg-card p-5 shadow-sm sm:p-6">
-                  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                    Availability
-                  </p>
-                  <p className="mt-1 text-sm font-medium text-engineering-navy">Contact for lead time</p>
-
-                  <Separator className="my-5" />
-
-                  <div className="space-y-2">
-                    <Label htmlFor="product-qty" className="text-sm font-medium text-engineering-navy">
-                      Quantity
-                    </Label>
-                    <div className="flex max-w-[11rem] items-stretch gap-0 rounded-md border border-input bg-background">
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="icon"
-                        className="h-11 shrink-0 rounded-none border-r border-input"
-                        aria-label="Decrease quantity"
-                        onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                      >
-                        <Minus className="h-4 w-4" />
-                      </Button>
-                      <Input
-                        id="product-qty"
-                        type="number"
-                        min={1}
-                        max={999}
-                        value={quantity}
-                        onChange={(e) => {
-                          const v = parseInt(e.target.value, 10);
-                          if (Number.isNaN(v)) setQuantity(1);
-                          else setQuantity(Math.min(999, Math.max(1, v)));
-                        }}
-                        className="h-11 border-0 text-center text-base font-medium shadow-none focus-visible:ring-0"
-                      />
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="icon"
-                        className="h-11 shrink-0 rounded-none border-l border-input"
-                        aria-label="Increase quantity"
-                        onClick={() => setQuantity((q) => Math.min(999, q + 1))}
-                      >
-                        <Plus className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
-
-                  <Button variant="industrial" size="lg" className="mt-6 w-full sm:h-12">
-                    Request quote
-                  </Button>
-                </div>
               </div>
             </div>
 
