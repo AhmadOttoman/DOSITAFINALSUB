@@ -48,7 +48,7 @@ const ProductDetail = () => {
           <div className="space-y-12">
             {/* Shopify-style: media + product summary side by side on large screens */}
             <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
-              <div className="min-w-0 lg:sticky lg:top-24 lg:self-start">
+              <div className="flex min-w-0 w-full justify-center lg:sticky lg:top-24 lg:self-start">
                 <h2 className="sr-only">Product images</h2>
                 <ProductImageGallery
                   images={[product.image, ...(product.productImages ?? [])]}
@@ -68,9 +68,13 @@ const ProductDetail = () => {
                   <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
                     Overview
                   </h2>
-                  <p className="text-base leading-relaxed text-muted-foreground md:text-lg">
-                    {product.introduction || product.description}
-                  </p>
+                  <div className="space-y-4 text-base leading-relaxed text-muted-foreground md:text-lg">
+                    {(product.introduction || product.description)
+                      .split(/\n\n+/)
+                      .map((paragraph, index) => (
+                        <p key={index}>{paragraph.trim()}</p>
+                      ))}
+                  </div>
                 </section>
               </div>
             </div>

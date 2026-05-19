@@ -47,11 +47,20 @@ function FullscreenViewer({
       if (e.key === "Escape") {
         e.preventDefault();
         onClose();
+        return;
+      }
+      if (!api || slides.length < 2) return;
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        api.scrollPrev();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        api.scrollNext();
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
+  }, [onClose, api, slides.length]);
 
   React.useEffect(() => {
     if (!api) return;
@@ -113,28 +122,23 @@ function FullscreenViewer({
           <Carousel
             setApi={setApi}
             opts={{
-              align: "start",
+              align: "center",
               loop: hasMultiple,
               duration: 20,
               startIndex: initialIndex,
             }}
-            className="h-full w-full max-h-[calc(100dvh-5rem)]"
+            className="h-full w-full max-h-[calc(100dvh-8rem)]"
           >
             <CarouselContent className="-ml-0 h-full">
               {slides.map((src, i) => (
                 <CarouselItem key={`fullscreen-slide-${i}`} className="flex min-h-0 basis-full shrink-0 pl-0">
-                  <div className="flex max-h-[calc(100dvh-9rem)] w-full flex-1 flex-col items-center justify-center sm:max-h-[calc(100dvh-8rem)]">
+                  <div className="flex max-h-[calc(100dvh-12rem)] w-full flex-1 flex-col items-center justify-center sm:max-h-[calc(100dvh-10rem)]">
                     <img
                       src={src}
                       alt={`${productTitle} — fullscreen image ${i + 1}`}
                       draggable={false}
-                      className="max-h-[calc(100dvh-10rem)] max-w-[calc(100vw-2rem)] select-none object-contain sm:max-h-[calc(100dvh-8rem)] sm:max-w-[calc(100vw-8rem)]"
+                      className="max-h-[calc(100dvh-14rem)] max-w-[calc(100vw-5rem)] select-none object-contain sm:max-h-[calc(100dvh-12rem)] sm:max-w-[calc(100vw-10rem)]"
                     />
-                    {slides.length > 1 ? (
-                      <span className="mt-2 text-[11px] font-medium uppercase tracking-widest text-white/65">
-                        {active + 1} / {slides.length}
-                      </span>
-                    ) : null}
                   </div>
                 </CarouselItem>
               ))}
@@ -143,17 +147,45 @@ function FullscreenViewer({
               <>
                 <CarouselPrevious
                   variant="outline"
-                  className="absolute left-0 top-1/2 z-[325] hidden h-12 w-12 -translate-y-1/2 rounded-full border-white/35 bg-black/45 text-white shadow-lg backdrop-blur-sm hover:bg-black/65 hover:text-white md:flex [&_svg]:text-white"
+                  className="absolute left-1 top-1/2 z-[325] flex h-10 w-10 -translate-y-1/2 rounded-full border-white/35 bg-black/55 text-white shadow-lg backdrop-blur-sm hover:bg-black/75 hover:text-white sm:left-2 sm:h-12 sm:w-12 [&_svg]:text-white disabled:opacity-40"
                   aria-label="Previous image"
                 />
                 <CarouselNext
                   variant="outline"
-                  className="absolute right-0 top-1/2 z-[325] hidden h-12 w-12 -translate-y-1/2 rounded-full border-white/35 bg-black/45 text-white shadow-lg backdrop-blur-sm hover:bg-black/65 hover:text-white md:flex [&_svg]:text-white"
+                  className="absolute right-1 top-1/2 z-[325] flex h-10 w-10 -translate-y-1/2 rounded-full border-white/35 bg-black/55 text-white shadow-lg backdrop-blur-sm hover:bg-black/75 hover:text-white sm:right-2 sm:h-12 sm:w-12 [&_svg]:text-white disabled:opacity-40"
                   aria-label="Next image"
                 />
               </>
             ) : null}
           </Carousel>
+
+          {hasMultiple ? (
+            <div className="pointer-events-auto absolute bottom-2 left-0 right-0 z-[325] flex flex-col items-center gap-3 px-4 sm:bottom-4">
+              <div
+                className="flex justify-center gap-2"
+                role="tablist"
+                aria-label="Fullscreen image navigation"
+              >
+                {slides.map((_, i) => (
+                  <button
+                    key={`fs-dot-${i}`}
+                    type="button"
+                    role="tab"
+                    aria-selected={active === i}
+                    aria-label={`Go to image ${i + 1}`}
+                    onClick={() => api?.scrollTo(i)}
+                    className={cn(
+                      "h-2 rounded-full transition-all",
+                      active === i ? "w-6 bg-white" : "w-2 bg-white/40 hover:bg-white/60"
+                    )}
+                  />
+                ))}
+              </div>
+              <span className="text-[11px] font-medium uppercase tracking-widest text-white/70">
+                {active + 1} / {slides.length}
+              </span>
+            </div>
+          ) : null}
         </div>
       </div>
     </div>
@@ -248,17 +280,17 @@ export function ProductImageGallery({
   };
 
   return (
-    <div className="space-y-3">
-      {/* Shopify-style: vertical thumbs (desktop) + main media */}
+    <div className="mx-auto w-full max-w-fit space-y-3">
+      {/* Vertical thumbs (desktop) + main media — centered on page */}
       <div
-        className="flex flex-col gap-3 lg:flex-row lg:items-start lg:gap-3"
+        className="flex flex-col items-center gap-3 lg:flex-row lg:items-start lg:justify-center lg:gap-3"
         role="region"
         aria-label={`${productTitle} product images`}
       >
         {/* Desktop: vertical thumbnail rail (left, Dawn-style) */}
         {hasMultiple ? (
           <div
-            className="hidden lg:flex w-16 shrink-0 flex-col gap-2 overflow-y-auto py-0.5 pr-1 max-h-[min(560px,65vh)]"
+            className="hidden lg:flex w-14 shrink-0 flex-col gap-2 overflow-y-auto py-0.5 pr-1 max-h-[min(22rem,50vh)]"
             role="tablist"
             aria-label="Product image thumbnails"
           >
@@ -270,7 +302,7 @@ export function ProductImageGallery({
                 aria-selected={selected === i}
                 aria-label={`Image ${i + 1} of ${slides.length}`}
                 onClick={() => setSelected(i)}
-                className={cn(thumbClass(selected === i), "aspect-square w-14")}
+                className={cn(thumbClass(selected === i), "aspect-square w-12")}
               >
                 <img
                   src={src}
@@ -283,8 +315,8 @@ export function ProductImageGallery({
           </div>
         ) : null}
 
-        {/* Main media — square canvas, white bg, swipe on touch */}
-        <div className="relative min-w-0 flex-1">
+        {/* Main media — compact preview; click opens fullscreen */}
+        <div className="relative mx-auto min-w-0 max-w-[min(100%,16rem)] sm:max-w-[18rem] md:max-w-[20rem]">
           <div
             className={cn(
               "relative aspect-square w-full overflow-hidden rounded-md border border-border/60 bg-white",
@@ -304,7 +336,7 @@ export function ProductImageGallery({
                 src={currentSrc}
                 alt={`${productTitle} — product image ${selected + 1}`}
                 draggable={false}
-                className="max-h-full max-w-full object-contain p-4 transition-transform duration-300 ease-out group-hover:scale-[1.03]"
+                className="max-h-full max-w-full object-contain p-2 sm:p-3"
               />
               <span className="pointer-events-none absolute right-2.5 top-2.5 flex items-center gap-1 rounded border border-border/70 bg-white/95 px-2 py-1 text-[11px] font-medium text-muted-foreground shadow-sm md:text-xs">
                 <Maximize2 className="h-3 w-3 shrink-0" aria-hidden />
@@ -366,7 +398,7 @@ export function ProductImageGallery({
             </div>
           ) : null}
 
-          <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-sm text-muted-foreground">
+          <div className="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
             {hasMultiple ? (
               <span className="tabular-nums">
                 {selected + 1} / {slides.length}
@@ -387,13 +419,13 @@ export function ProductImageGallery({
 
       {/* Mobile / tablet: horizontal thumbnail strip */}
       {hasMultiple ? (
-        <div className="lg:hidden">
-          <p className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+        <div className="mx-auto w-full max-w-fit lg:hidden">
+          <p className="mb-2 text-center text-xs font-medium uppercase tracking-wide text-muted-foreground">
             More images
           </p>
           <div
             ref={mobileStripRef}
-            className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex justify-center gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             role="tablist"
             aria-label="Product image thumbnails"
           >
@@ -406,7 +438,7 @@ export function ProductImageGallery({
                 aria-selected={selected === i}
                 aria-label={`Image ${i + 1} of ${slides.length}`}
                 onClick={() => setSelected(i)}
-                className={cn(thumbClass(selected === i), "h-16 w-16 shrink-0")}
+                className={cn(thumbClass(selected === i), "h-14 w-14 shrink-0")}
               >
                 <img
                   src={src}

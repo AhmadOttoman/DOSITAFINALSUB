@@ -2,6 +2,11 @@ import treatmentSystems from "@/assets/treatment-systems.jpg";
 import disinfectionSystems from "@/assets/disinfection-systems.jpg";
 import poolEquipment from "@/assets/pool-equipment.jpg";
 import uvSystems from "@/assets/uv-systems.jpg";
+import uvSystemsDrinking1 from "@/assets/uv-systems-drinking-1.png";
+import uvSystemsDrinking2 from "@/assets/uv-systems-drinking-2.png";
+import uvSystemsDrinking3 from "@/assets/uv-systems-drinking-3.png";
+import uvSystemsDrinking4 from "@/assets/uv-systems-drinking-4.png";
+import uvSystemsDrinking5 from "@/assets/uv-systems-drinking-5.png";
 import copperIonization from "@/assets/copper-ionization.jpg";
 import ozoneGenerator from "@/assets/ozone-generator.jpg";
 import dosingSystems from "@/assets/dosing-systems.jpg";
@@ -28,7 +33,7 @@ export const drinkingWaterProducts: Product[] = [
     id: "uv-systems-drinking",
     title: "UV Systems",
     description: "Advanced ultraviolet disinfection systems for chemical-free drinking water treatment and pathogen elimination.",
-    image: uvSystems,
+    image: uvSystemsDrinking1,
     icon: <Zap className="h-8 w-8 text-primary" />,
     features: [
       "UV-C technology for disinfection",
@@ -46,7 +51,11 @@ export const drinkingWaterProducts: Product[] = [
       "Accessories": "Our product range includes UV intensity monitoring.",
       "Options": "Optional features include BMS, flow switches and an hour counter.",
     },
-    introduction: "Our UV Systems represent the cutting edge of water disinfection technology, providing reliable, chemical-free treatment for drinking water applications. Using powerful UV-C light, these systems effectively eliminate bacteria, viruses, and other pathogens without altering the taste or chemistry of your water.",
+    introduction: `UV disinfection systems refer to the application of Ultra Violet radiation, ideally at 254nm wavelength, to neutralize pollutant organisms such as: viruses, bacteria, & fungi; in the air, water, or on surfaces intended for disinfection. The disinfection depends largely on the radiation dose & the exposure time.
+
+This process leaves no trace in or on the disinfected medium or surface, & creates no byproducts
+
+Dosita has been a developer & supplier of UV disinfection systems since 2000, with a product ranges in air disinfection, potable water, & waste water, for projects in residential, commercial, & industrial facilities.`,
     certifications: [
       { title: "ISO 9001:2015", url: "/certifications/dosita-iso-9001-2027.pdf" },
       { title: "WRAS", url: "/certifications/uv-wras-certificate-2029.pdf" },
@@ -56,7 +65,12 @@ export const drinkingWaterProducts: Product[] = [
     manuals: [
       { title: "UVSafe Brochure", url: "/manuals/uvisafe-brochure-1-5.pdf" },
     ],
-    productImages: [uvSystems, treatmentSystems]
+    productImages: [
+      uvSystemsDrinking2,
+      uvSystemsDrinking3,
+      uvSystemsDrinking4,
+      uvSystemsDrinking5,
+    ],
   },
   {
     id: "copper-silver-ionization-drinking",
