@@ -4,7 +4,9 @@ const AboutSection = () => {
       <div className="mx-auto max-w-4xl">
         <div className="mb-16 text-center">
           <h2 className="mb-4 text-4xl font-black uppercase tracking-tighter text-engineering-navy md:text-6xl">
-            About <span className="text-primary">Dosita</span>
+            About
+            <br />
+            <span className="text-primary">Dosita</span>
           </h2>
           <p className="text-lg text-muted-foreground">
             Three decades of engineering excellence.
