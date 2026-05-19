@@ -1,21 +1,19 @@
 const HeroSection = () => {
   return (
-    <section id="home" className="relative overflow-hidden bg-background pt-28 sm:pt-32">
-      <div className="mx-auto flex min-h-[calc(100vh-7rem)] max-w-7xl flex-col items-center px-6 text-center md:px-8">
-        <div className="mx-auto max-w-5xl">
-          <h1 className="text-4xl font-black uppercase leading-[0.95] tracking-tight text-engineering-navy sm:text-6xl lg:text-8xl">
-            Unmatched Legacy in
-            <br />
-            Water Disinfection Equipment
-          </h1>
+    <section id="home" className="relative overflow-hidden bg-background pt-32 pb-24 sm:pt-40 sm:pb-32">
+      <div className="mx-auto flex min-h-[calc(100vh-8rem)] max-w-6xl flex-col items-center justify-center px-6 text-center">
+        <h1 className="text-5xl font-black uppercase leading-[0.9] tracking-tighter text-engineering-navy sm:text-7xl lg:text-9xl">
+          Unmatched
+          <br />
+          Legacy in
+          <br />
+          <span className="text-primary">Water</span> Disinfection
+        </h1>
 
-          <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-xl">
-            Engineered systems for safer, cleaner water in commercial and industrial
-            environments worldwide.
-          </p>
-
-        </div>
-
+        <p className="mx-auto mt-10 max-w-2xl text-lg font-medium leading-relaxed text-muted-foreground sm:text-2xl">
+          Engineered systems for safer, cleaner water in commercial and industrial
+          environments worldwide.
+        </p>
       </div>
     </section>
   );
