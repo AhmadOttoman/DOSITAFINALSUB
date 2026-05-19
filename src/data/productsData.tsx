@@ -1,5 +1,3 @@
-import treatmentSystems from "@/assets/treatment-systems.jpg";
-import disinfectionSystems from "@/assets/disinfection-systems.jpg";
 import poolEquipment from "@/assets/pool-equipment.jpg";
 import uvSystems from "@/assets/uv-systems.jpg";
 import uvSystemsDrinking1 from "@/assets/uv-systems-drinking-1.png";
@@ -14,10 +12,8 @@ import csiSystemsDrinking3 from "@/assets/csi-systems-drinking-3.png";
 import csiSystemsDrinking4 from "@/assets/csi-systems-drinking-4.png";
 import csiSystemsDrinking5 from "@/assets/csi-systems-drinking-5.png";
 import ozoneGenerator from "@/assets/ozone-generator.jpg";
-import dosingSystems from "@/assets/dosing-systems.jpg";
 import electricHeaters from "@/assets/electric-heaters.jpg";
-import circulationPumps from "@/assets/circulation-pumps.jpg";
-import { Droplets, Shield, Waves, Zap, Filter, Settings, Atom, Wind, Beaker, Thermometer, RotateCw } from "lucide-react";
+import { Zap, Atom, Thermometer } from "lucide-react";
 
 export interface Product {
   id: string;
@@ -124,6 +120,41 @@ Dosita has been a developer & supplier of UV disinfection systems since 2000, wi
 
 export const swimmingPoolProducts: Product[] = [
   {
+    id: "electrical-heater",
+    title: "Electrical Heater",
+    description: "Efficient electric heating systems for optimal swimming pool water temperature control in all applications.",
+    image: electricHeaters,
+    icon: <Thermometer className="h-8 w-8 text-primary" />,
+    features: [
+      "Energy efficient heating elements",
+      "Digital temperature controls",
+      "Corrosion resistant construction",
+      "Multiple power configurations",
+      "Safety shutdown systems",
+      "Modular design options"
+    ],
+    specifications: {
+      "Power": "5-500 kW available",
+      "Voltage": "208-480V, 3-phase",
+      "Material": "316L stainless steel",
+      "Control": "Digital PID"
+    },
+    introduction: "Electrical pool heaters offer precise temperature control and rapid heating capabilities, ensuring comfortable swimming conditions year-round. Built with premium stainless steel and advanced digital controls for maximum reliability and performance.",
+    certifications: [
+      { title: "UL Listed - Electrical Safety", url: "/manuals/product-manual.pdf" },
+      { title: "NSF/ANSI Standard 50 Certified", url: "/manuals/product-manual.pdf" },
+      { title: "CE Marking - European Conformity", url: "/manuals/product-manual.pdf" },
+      { title: "CSA Certified - Canadian Standards", url: "/manuals/product-manual.pdf" },
+      { title: "ISO 9001:2015 Quality Management", url: "/manuals/product-manual.pdf" },
+    ],
+    manuals: [
+      { title: "Installation Guide", url: "/manuals/product-manual.pdf" },
+      { title: "Electrical Schematic", url: "/manuals/product-manual.pdf" },
+      { title: "Service Manual", url: "/manuals/product-manual.pdf" }
+    ],
+    productImages: [electricHeaters, poolEquipment]
+  },
+  {
     id: "uv-systems-pool",
     title: "UV System",
     description: "Advanced ultraviolet disinfection systems for chemical-free swimming pool water treatment and pathogen elimination.",
@@ -191,178 +222,4 @@ export const swimmingPoolProducts: Product[] = [
     ],
     productImages: [copperIonization, ozoneGenerator]
   },
-  {
-    id: "swimming-pool-pumps",
-    title: "Swimming Pool Pumps",
-    description: "High-performance circulation pumps for continuous water flow and optimal swimming pool system operation.",
-    image: circulationPumps,
-    icon: <RotateCw className="h-8 w-8 text-primary" />,
-    features: [
-      "Variable speed drive capability",
-      "High hydraulic efficiency",
-      "Energy saving operations",
-      "Corrosion resistant construction",
-      "Low noise operation",
-      "Easy maintenance access"
-    ],
-    specifications: {
-      "Flow Rate": "100-5000 GPM",
-      "Head": "Up to 200 feet",
-      "Power": "1-200 HP available",
-      "Efficiency": "Up to 85%"
-    },
-    introduction: "Our swimming pool pumps are engineered for reliability and efficiency, providing optimal water circulation with minimal energy consumption. Variable speed technology ensures whisper-quiet operation while reducing operating costs by up to 80%.",
-    certifications: [
-      { title: "Energy Star Certified", url: "/manuals/product-manual.pdf" },
-      { title: "NSF/ANSI Standard 50 Certified", url: "/manuals/product-manual.pdf" },
-      { title: "UL Listed - Safety Standards", url: "/manuals/product-manual.pdf" },
-      { title: "CE Marking - European Conformity", url: "/manuals/product-manual.pdf" },
-      { title: "ISO 9001:2015 Quality Management", url: "/manuals/product-manual.pdf" },
-    ],
-    manuals: [
-      { title: "Installation Manual", url: "/manuals/product-manual.pdf" },
-      { title: "Operation & Maintenance", url: "/manuals/product-manual.pdf" },
-      { title: "Troubleshooting Guide", url: "/manuals/product-manual.pdf" }
-    ],
-    productImages: [circulationPumps, poolEquipment]
-  },
-  {
-    id: "electrical-heater",
-    title: "Electrical Heater",
-    description: "Efficient electric heating systems for optimal swimming pool water temperature control in all applications.",
-    image: electricHeaters,
-    icon: <Thermometer className="h-8 w-8 text-primary" />,
-    features: [
-      "Energy efficient heating elements",
-      "Digital temperature controls",
-      "Corrosion resistant construction",
-      "Multiple power configurations",
-      "Safety shutdown systems",
-      "Modular design options"
-    ],
-    specifications: {
-      "Power": "5-500 kW available",
-      "Voltage": "208-480V, 3-phase",
-      "Material": "316L stainless steel",
-      "Control": "Digital PID"
-    },
-    introduction: "Electrical pool heaters offer precise temperature control and rapid heating capabilities, ensuring comfortable swimming conditions year-round. Built with premium stainless steel and advanced digital controls for maximum reliability and performance.",
-    certifications: [
-      { title: "UL Listed - Electrical Safety", url: "/manuals/product-manual.pdf" },
-      { title: "NSF/ANSI Standard 50 Certified", url: "/manuals/product-manual.pdf" },
-      { title: "CE Marking - European Conformity", url: "/manuals/product-manual.pdf" },
-      { title: "CSA Certified - Canadian Standards", url: "/manuals/product-manual.pdf" },
-      { title: "ISO 9001:2015 Quality Management", url: "/manuals/product-manual.pdf" },
-    ],
-    manuals: [
-      { title: "Installation Guide", url: "/manuals/product-manual.pdf" },
-      { title: "Electrical Schematic", url: "/manuals/product-manual.pdf" },
-      { title: "Service Manual", url: "/manuals/product-manual.pdf" }
-    ],
-    productImages: [electricHeaters, poolEquipment]
-  },
-  {
-    id: "chemical-dosing",
-    title: "Chemical Dosing",
-    description: "Precision chemical dosing pumps and systems for accurate swimming pool water treatment chemical delivery.",
-    image: dosingSystems,
-    icon: <Beaker className="h-8 w-8 text-primary" />,
-    features: [
-      "Precision metering pumps",
-      "Automated control systems",
-      "Multiple chemical handling",
-      "Flow-proportional dosing",
-      "Safety interlocks included",
-      "Remote monitoring capability"
-    ],
-    specifications: {
-      "Flow Rate": "0.1-500 GPH",
-      "Pressure": "Up to 150 PSI",
-      "Control": "4-20mA, digital",
-      "Materials": "PVDF, 316SS"
-    },
-    introduction: "Chemical dosing systems provide automated, precise chemical delivery for maintaining optimal pool water chemistry. Advanced control algorithms ensure accurate dosing while minimizing chemical waste and maintaining safe water conditions.",
-    certifications: [
-      { title: "NSF/ANSI Standard 50 Certified", url: "/manuals/product-manual.pdf" },
-      { title: "CE Marking - European Conformity", url: "/manuals/product-manual.pdf" },
-      { title: "ISO 9001:2015 Quality Management", url: "/manuals/product-manual.pdf" },
-      { title: "ATEX Certified - Explosive Atmospheres", url: "/manuals/product-manual.pdf" },
-      { title: "FDA Compliant Materials", url: "/manuals/product-manual.pdf" },
-    ],
-    manuals: [
-      { title: "Installation & Setup Guide", url: "/manuals/product-manual.pdf" },
-      { title: "Calibration Procedures", url: "/manuals/product-manual.pdf" },
-      { title: "Safety & Maintenance Manual", url: "/manuals/product-manual.pdf" }
-    ],
-    productImages: [dosingSystems, treatmentSystems]
-  },
-  {
-    id: "swimming-pool-sand-filter",
-    title: "Swimming Pool Sand Filter",
-    description: "Multi-stage sand filtration systems for superior swimming pool water clarity and debris removal.",
-    image: disinfectionSystems,
-    icon: <Filter className="h-8 w-8 text-primary" />,
-    features: [
-      "Multi-stage filtration process",
-      "Automatic backwash systems",
-      "Variable speed drive pumps",
-      "Modular system design",
-      "Low operating costs",
-      "Minimal waste generation"
-    ],
-    specifications: {
-      "Filtration": "0.01-500 microns",
-      "Flow Rate": "10-10,000 GPM",
-      "Backwash": "Fully automated",
-      "Efficiency": ">99% removal"
-    },
-    introduction: "Sand filtration systems deliver exceptional water clarity through proven multi-media filtration technology. Automatic backwash cycles and intelligent controls minimize maintenance while ensuring optimal filtration performance for crystal-clear pool water.",
-    certifications: [
-      { title: "NSF/ANSI Standard 50 Certified", url: "/manuals/product-manual.pdf" },
-      { title: "CE Marking - European Conformity", url: "/manuals/product-manual.pdf" },
-      { title: "ISO 9001:2015 Quality Management", url: "/manuals/product-manual.pdf" },
-      { title: "ASME Pressure Vessel Code", url: "/manuals/product-manual.pdf" },
-      { title: "WRAS Approved Materials", url: "/manuals/product-manual.pdf" },
-    ],
-    manuals: [
-      { title: "Installation Manual", url: "/manuals/product-manual.pdf" },
-      { title: "Backwash Programming Guide", url: "/manuals/product-manual.pdf" },
-      { title: "Media Replacement Guide", url: "/manuals/product-manual.pdf" }
-    ],
-    productImages: [disinfectionSystems, poolEquipment]
-  },
-  {
-    id: "accessories",
-    title: "Accessories",
-    description: "Complete range of swimming pool accessories and components for system enhancement and maintenance.",
-    image: poolEquipment,
-    icon: <Settings className="h-8 w-8 text-primary" />,
-    features: [
-      "Wide range of accessories",
-      "Compatible with all systems",
-      "High-quality materials",
-      "Easy installation",
-      "Available on demand",
-      "Custom solutions available"
-    ],
-    specifications: {
-      "Range": "Complete selection",
-      "Availability": "On demand",
-      "Quality": "Premium grade",
-      "Support": "Technical assistance"
-    },
-    introduction: "Our comprehensive range of pool accessories and components ensures your system operates at peak efficiency. From replacement parts to enhancement modules, we provide everything needed for installation, maintenance, and upgrades.",
-    certifications: [
-      { title: "NSF/ANSI Standard 50 Certified Components", url: "/manuals/product-manual.pdf" },
-      { title: "CE Marking - European Conformity", url: "/manuals/product-manual.pdf" },
-      { title: "ISO 9001:2015 Quality Management", url: "/manuals/product-manual.pdf" },
-      { title: "RoHS Compliant Materials", url: "/manuals/product-manual.pdf" },
-    ],
-    manuals: [
-      { title: "Accessories Catalog", url: "/manuals/product-manual.pdf" },
-      { title: "Installation Guidelines", url: "/manuals/product-manual.pdf" },
-      { title: "Compatibility Guide", url: "/manuals/product-manual.pdf" }
-    ],
-    productImages: [poolEquipment, treatmentSystems]
-  }
 ];
