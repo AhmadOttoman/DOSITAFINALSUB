@@ -66,7 +66,7 @@ const ProductDetail = () => {
 
                 <section>
                   <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                    Overview
+                    {product.overviewTitle ?? "Overview"}
                   </h2>
                   <div className="space-y-4 text-base leading-relaxed text-muted-foreground md:text-lg">
                     {(product.introduction || product.description)
@@ -113,6 +113,33 @@ const ProductDetail = () => {
                         >
                           <span className="font-medium text-foreground group-hover:text-primary transition-colors">
                             {cert.title}
+                          </span>
+                          <ArrowLeft className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors rotate-180" />
+                        </a>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
+            )}
+
+            {/* Brochures Section */}
+            {product.brochures && product.brochures.length > 0 && (
+              <section>
+                <h2 className="text-3xl font-bold text-engineering-navy mb-6">Brochures</h2>
+                <Card className="border-0 shadow-card bg-gradient-to-br from-card to-secondary/20">
+                  <CardContent className="pt-6">
+                    <div className="space-y-3">
+                      {product.brochures.map((brochure, index) => (
+                        <a
+                          key={index}
+                          href={brochure.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-between p-4 rounded-lg bg-background/50 hover:bg-background transition-colors group"
+                        >
+                          <span className="font-medium text-foreground group-hover:text-primary transition-colors">
+                            {brochure.title}
                           </span>
                           <ArrowLeft className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors rotate-180" />
                         </a>

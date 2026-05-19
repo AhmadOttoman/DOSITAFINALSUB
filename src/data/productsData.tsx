@@ -23,8 +23,10 @@ export interface Product {
   features: string[];
   specifications: Record<string, string>;
   introduction?: string;
+  overviewTitle?: string;
   certifications?: { title: string; url: string }[];
   manuals?: { title: string; url: string }[];
+  brochures?: { title: string; url: string }[];
   productImages?: string[];
 }
 
@@ -92,18 +94,17 @@ Dosita has been a developer & supplier of UV disinfection systems since 2000, wi
       "Power": "12-24V DC",
       "Material": "99.9% pure copper"
     },
-    introduction: "Copper Silver Ionization systems offer a natural, environmentally friendly approach to water treatment. By releasing controlled amounts of copper and silver ions, these systems provide long-lasting sanitization with minimal chemical use, making them ideal for sustainable water management.",
+    overviewTitle: "Introduction",
+    introduction:
+      "CSI disinfection, is the process of releasing ions to a water supply with the purpose of neutralizing harmful organisms, most commonly for Legionella. The concept was devised & developed by NASA in the 60's, & gradually made its presence into civilian applications for its effect on pathogens.",
     certifications: [
-      { title: "EPA Registered - Environmental Protection Agency", url: "/manuals/product-manual.pdf" },
-      { title: "NSF/ANSI Standard 61 - Drinking Water System Components", url: "/manuals/product-manual.pdf" },
-      { title: "ISO 14001:2015 Environmental Management", url: "/manuals/product-manual.pdf" },
-      { title: "CE Marking - European Conformity", url: "/manuals/product-manual.pdf" },
-      { title: "WRAS Approved - Water Regulations Advisory Scheme", url: "/manuals/product-manual.pdf" },
+      { title: "ISO 9001:2015", url: "/certifications/dosita-iso-9001-2027.pdf" },
+      { title: "WRAS", url: "/certifications/csi-wras-certificate-2029.pdf" },
+      { title: "UDEM", url: "/certifications/csi-udem-2025.pdf" },
+      { title: "NSF", url: "/certifications/csi-nsf-test-report-2024.pdf" },
     ],
-    manuals: [
-      { title: "Installation Guide", url: "/manuals/product-manual.pdf" },
-      { title: "Maintenance Manual", url: "/manuals/product-manual.pdf" },
-      { title: "Electrode Replacement Guide", url: "/manuals/product-manual.pdf" }
+    brochures: [
+      { title: "IonSafe Brochure 1.0", url: "/manuals/ionsafe-brochure-1-0.pdf" },
     ],
     productImages: [copperIonization, disinfectionSystems]
   }
