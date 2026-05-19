@@ -28,12 +28,13 @@ const ProductsSection = () => {
   const handleMouseLeave = () => setIsPlaying(true);
 
   return (
-    <section id="products" className="py-20 bg-gradient-to-b from-background to-secondary">
+    <section id="products" className="py-32 bg-background">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-bold text-engineering-navy mb-6 uppercase tracking-tight">
+        <div className="mb-20">
+          <h2 className="text-4xl md:text-6xl font-black uppercase leading-none tracking-tighter text-engineering-navy mb-4">
             Products
-            <span className="block text-primary">Excellence In Every Detail</span>
+            <br />
+            <span className="text-primary text-3xl md:text-5xl">Excellence in every detail</span>
           </h2>
         </div>
 
@@ -51,46 +52,42 @@ const ProductsSection = () => {
             <CarouselContent className="-ml-2 md:-ml-4">
               {allProducts.map((product) => (
                 <CarouselItem key={product.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-                  <Card className="group hover:shadow-professional transition-all duration-300 hover:-translate-y-2 border-0 shadow-card bg-gradient-to-br from-card to-secondary/20 h-full flex flex-col">
-                    <CardHeader className="pb-4">
-                      <div className="relative h-48 rounded-lg overflow-hidden mb-4">
-                        <img 
-                          src={product.image} 
-                          alt={product.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-engineering-navy/60 to-transparent"></div>
-                        <div className="absolute bottom-4 left-4">
-                          {product.icon}
-                        </div>
+                  <Card className="group relative bg-white rounded-[2.5rem] p-8 border border-border shadow-sm hover:shadow-2xl transition-all duration-500 h-full flex flex-col overflow-hidden">
+                    <div className="relative h-48 w-full bg-gradient-to-br from-secondary to-muted rounded-2xl mb-8 overflow-hidden">
+                      <img
+                        src={product.image}
+                        alt={product.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm p-3 rounded-full text-primary">
+                        {product.icon}
                       </div>
-                      <CardTitle className="text-2xl text-engineering-navy group-hover:text-primary transition-colors">
+                    </div>
+
+                    <CardContent className="p-0 flex flex-col flex-grow">
+                      <h3 className="text-2xl md:text-3xl font-bold text-engineering-navy mb-4">
                         {product.title}
-                      </CardTitle>
-                    </CardHeader>
-                    
-                    <CardContent className="space-y-4 flex flex-col flex-grow">
-                      <p className="text-muted-foreground leading-relaxed">
+                      </h3>
+                      <p className="text-muted-foreground mb-8 leading-relaxed">
                         {product.description}
                       </p>
-                      
-                      <ul className="space-y-2">
+
+                      <ul className="space-y-3 mb-10 text-sm font-medium text-foreground/70">
                         {product.features.slice(0, 3).map((feature, index) => (
-                          <li key={index} className="flex items-center text-sm text-foreground">
-                            <div className="w-2 h-2 bg-primary rounded-full mr-3"></div>
+                          <li key={index} className="flex items-center">
+                            <span className="w-1.5 h-1.5 rounded-full bg-primary mr-3 shrink-0"></span>
                             {feature}
                           </li>
                         ))}
                       </ul>
-                      
-                      <Button 
-                        variant="industrial" 
-                        className="w-full group-hover:bg-primary group-hover:text-white mt-auto"
+
+                      <Button
                         asChild
+                        className="w-full py-6 rounded-full bg-engineering-navy text-white font-bold hover:bg-primary hover:scale-[1.02] active:scale-95 transition-all mt-auto"
                       >
                         <Link to={`/products/${product.id}`}>
                           Learn More
-                          <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                          <ArrowRight className="ml-2 h-4 w-4" />
                         </Link>
                       </Button>
                     </CardContent>
@@ -98,12 +95,13 @@ const ProductsSection = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="hidden md:flex -left-12 bg-card border-border hover:bg-secondary" />
-            <CarouselNext className="hidden md:flex -right-12 bg-card border-border hover:bg-secondary" />
           </Carousel>
-          
-          <div className="text-center mt-8">
-            <Button variant="outline" asChild>
+
+          <div className="text-center mt-16">
+            <Button
+              asChild
+              className="px-8 py-6 rounded-full border-2 border-engineering-navy bg-transparent text-engineering-navy font-bold text-sm uppercase tracking-widest hover:bg-secondary"
+            >
               <Link to="/products">
                 View All Products
                 <ArrowRight className="ml-2 h-4 w-4" />
