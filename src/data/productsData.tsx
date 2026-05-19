@@ -8,6 +8,11 @@ import uvSystemsDrinking3 from "@/assets/uv-systems-drinking-3.png";
 import uvSystemsDrinking4 from "@/assets/uv-systems-drinking-4.png";
 import uvSystemsDrinking5 from "@/assets/uv-systems-drinking-5.png";
 import copperIonization from "@/assets/copper-ionization.jpg";
+import csiSystemsDrinking1 from "@/assets/csi-systems-drinking-1.png";
+import csiSystemsDrinking2 from "@/assets/csi-systems-drinking-2.png";
+import csiSystemsDrinking3 from "@/assets/csi-systems-drinking-3.png";
+import csiSystemsDrinking4 from "@/assets/csi-systems-drinking-4.png";
+import csiSystemsDrinking5 from "@/assets/csi-systems-drinking-5.png";
 import ozoneGenerator from "@/assets/ozone-generator.jpg";
 import dosingSystems from "@/assets/dosing-systems.jpg";
 import electricHeaters from "@/assets/electric-heaters.jpg";
@@ -21,7 +26,8 @@ export interface Product {
   image: string;
   icon: JSX.Element;
   features: string[];
-  specifications: Record<string, string>;
+  specifications?: Record<string, string>;
+  specificationBullets?: string[];
   introduction?: string;
   overviewTitle?: string;
   certifications?: { title: string; url: string }[];
@@ -78,7 +84,7 @@ Dosita has been a developer & supplier of UV disinfection systems since 2000, wi
     id: "copper-silver-ionization-drinking",
     title: "Copper Silver Ionization",
     description: "Eco-friendly copper-silver ionization systems for natural drinking water sanitization using mineral technology.",
-    image: copperIonization,
+    image: csiSystemsDrinking1,
     icon: <Atom className="h-8 w-8 text-primary" />,
     features: [
       "Natural mineral sanitization",
@@ -88,12 +94,13 @@ Dosita has been a developer & supplier of UV disinfection systems since 2000, wi
       "Automatic ion level control",
       "Environmentally friendly process"
     ],
-    specifications: {
-      "Ion Output": "0.2-2.0 ppm Cu",
-      "Electrode Life": "1-3 years",
-      "Power": "12-24V DC",
-      "Material": "99.9% pure copper"
-    },
+    specificationBullets: [
+      "Our product range adopts Cu:AG 90:10, or 99.99 pure copper, depending on the requirements.",
+      "Our vessels are SS316, & tested to 10 bars.",
+      "Programmable controller for voltage, amperes, & time.",
+      "Flow meters & BMS control meters are available options.",
+      "Standard range (see brochure) & custom made units.",
+    ],
     overviewTitle: "Introduction",
     introduction:
       "CSI disinfection, is the process of releasing ions to a water supply with the purpose of neutralizing harmful organisms, most commonly for Legionella. The concept was devised & developed by NASA in the 60's, & gradually made its presence into civilian applications for its effect on pathogens.",
@@ -106,7 +113,12 @@ Dosita has been a developer & supplier of UV disinfection systems since 2000, wi
     brochures: [
       { title: "IonSafe Brochure 1.0", url: "/manuals/ionsafe-brochure-1-0.pdf" },
     ],
-    productImages: [copperIonization, disinfectionSystems]
+    productImages: [
+      csiSystemsDrinking2,
+      csiSystemsDrinking4,
+      csiSystemsDrinking3,
+      csiSystemsDrinking5,
+    ],
   }
 ];
 

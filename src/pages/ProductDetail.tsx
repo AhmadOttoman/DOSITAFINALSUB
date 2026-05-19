@@ -85,7 +85,13 @@ const ProductDetail = () => {
               <Card className="border-0 shadow-card bg-gradient-to-br from-card to-secondary/20">
                 <CardContent className="pt-6">
                   <div className="space-y-3">
-                    {Object.entries(product.specifications).map(([key, value]) => (
+                    {product.specificationBullets?.length ? (
+                      product.specificationBullets.map((item, index) => (
+                        <p key={index} className="py-2 text-base leading-relaxed text-muted-foreground md:text-lg border-b border-border/50 last:border-0">
+                          • {item}
+                        </p>
+                      ))
+                    ) : Object.entries(product.specifications ?? {}).map(([key, value]) => (
                       <div key={key} className="flex justify-between items-center py-3 border-b border-border/50 last:border-0">
                         <span className="text-muted-foreground font-medium">{key}:</span>
                         <span className="text-foreground font-semibold">{value}</span>
