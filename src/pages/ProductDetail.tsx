@@ -89,35 +89,58 @@ const ProductDetail = () => {
           </div>
 
           {/* Specifications */}
-          <section className="mt-32">
-            <h2 className="mb-12 text-3xl md:text-5xl font-black uppercase tracking-tighter text-engineering-navy">
-              Specifications
-            </h2>
-            <div className="rounded-[2.5rem] bg-secondary p-10 md:p-12">
-              <div className="space-y-1">
-                {product.specificationBullets?.length ? (
-                  product.specificationBullets.map((item, index) => (
+          {(product.specificationBullets?.length || product.specifications) && (
+            <section className="mt-32">
+              <h2 className="mb-12 text-3xl md:text-5xl font-black uppercase tracking-tighter text-engineering-navy">
+                Specifications
+              </h2>
+              <div className="rounded-[2.5rem] bg-secondary p-10 md:p-12">
+                <div className="space-y-1">
+                  {product.specificationBullets?.length ? (
+                    product.specificationBullets.map((item, index) => (
+                      <p
+                        key={index}
+                        className="border-b border-border/60 py-4 text-base leading-relaxed text-foreground/80 last:border-0 md:text-lg"
+                      >
+                        • {item}
+                      </p>
+                    ))
+                  ) : (
+                    Object.entries(product.specifications ?? {}).map(([key, value]) => (
+                      <div
+                        key={key}
+                        className="flex items-center justify-between border-b border-border/60 py-4 last:border-0"
+                      >
+                        <span className="font-medium text-muted-foreground">{key}</span>
+                        <span className="font-semibold text-engineering-navy">{value}</span>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Safety & Installation Notes */}
+          {product.safetyInstallationBullets?.length ? (
+            <section className="mt-24">
+              <h2 className="mb-12 text-3xl md:text-5xl font-black uppercase tracking-tighter text-engineering-navy">
+                {product.safetyInstallationTitle ?? "Safety & Installation Notes"}
+              </h2>
+              <div className="rounded-[2.5rem] bg-secondary p-10 md:p-12">
+                <div className="space-y-1">
+                  {product.safetyInstallationBullets.map((item, index) => (
                     <p
                       key={index}
                       className="border-b border-border/60 py-4 text-base leading-relaxed text-foreground/80 last:border-0 md:text-lg"
                     >
-                      {item}
+                      • {item}
                     </p>
-                  ))
-                ) : (
-                  Object.entries(product.specifications ?? {}).map(([key, value]) => (
-                    <div
-                      key={key}
-                      className="flex items-center justify-between border-b border-border/60 py-4 last:border-0"
-                    >
-                      <span className="font-medium text-muted-foreground">{key}</span>
-                      <span className="font-semibold text-engineering-navy">{value}</span>
-                    </div>
-                  ))
-                )}
+                  ))}
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
+          ) : null}
 
           {/* Resources */}
           {resourceSections.map((section) => (

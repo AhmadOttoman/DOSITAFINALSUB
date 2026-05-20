@@ -10,8 +10,11 @@ const ProductsSection = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [isPlaying, setIsPlaying] = useState(true);
   
-  // Combine all products from both categories
-  const allProducts = [...drinkingWaterProducts, ...swimmingPoolProducts];
+  // Combine products from both categories (dedupe shared entries e.g. Copper Silver Ionization)
+  const allProducts = [...drinkingWaterProducts, ...swimmingPoolProducts].filter(
+    (product, index, products) =>
+      products.findIndex((p) => p.id === product.id) === index
+  );
 
   // Auto-play functionality
   useEffect(() => {

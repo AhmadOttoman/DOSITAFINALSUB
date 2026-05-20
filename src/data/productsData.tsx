@@ -5,14 +5,13 @@ import uvSystemsDrinking2 from "@/assets/uv-systems-drinking-2.png";
 import uvSystemsDrinking3 from "@/assets/uv-systems-drinking-3.png";
 import uvSystemsDrinking4 from "@/assets/uv-systems-drinking-4.png";
 import uvSystemsDrinking5 from "@/assets/uv-systems-drinking-5.png";
-import copperIonization from "@/assets/copper-ionization.jpg";
 import csiSystemsDrinking1 from "@/assets/csi-systems-drinking-1.png";
 import csiSystemsDrinking2 from "@/assets/csi-systems-drinking-2.png";
 import csiSystemsDrinking3 from "@/assets/csi-systems-drinking-3.png";
 import csiSystemsDrinking4 from "@/assets/csi-systems-drinking-4.png";
 import csiSystemsDrinking5 from "@/assets/csi-systems-drinking-5.png";
-import ozoneGenerator from "@/assets/ozone-generator.jpg";
-import electricHeaters from "@/assets/electric-heaters.jpg";
+import heaterSystems1 from "@/assets/heater-systems-1.png";
+import heaterSystems2 from "@/assets/heater-systems-2.png";
 import { Zap, Atom, Thermometer } from "lucide-react";
 
 export interface Product {
@@ -29,8 +28,51 @@ export interface Product {
   certifications?: { title: string; url: string }[];
   manuals?: { title: string; url: string }[];
   brochures?: { title: string; url: string }[];
+  safetyInstallationBullets?: string[];
+  safetyInstallationTitle?: string;
   productImages?: string[];
 }
+
+export const copperSilverIonizationProduct: Product = {
+  id: "copper-silver-ionization-drinking",
+  title: "Copper Silver Ionization",
+  description: "Eco-friendly copper-silver ionization systems for natural drinking water sanitization using mineral technology.",
+  image: csiSystemsDrinking1,
+  icon: <Atom className="h-8 w-8 text-primary" />,
+  features: [
+    "Natural mineral sanitization",
+    "Long-lasting copper electrodes",
+    "Mineral-based water treatment",
+    "Reduced chemical requirements",
+    "Automatic ion level control",
+    "Environmentally friendly process"
+  ],
+  specificationBullets: [
+    "Our product range adopts Cu:AG 90:10, or 99.99 pure copper, depending on the requirements.",
+    "Our vessels are SS316, & tested to 10 bars.",
+    "Programmable controller for voltage, amperes, & time.",
+    "Flow meters & BMS control meters are available options.",
+    "Standard range (see brochure) & custom made units.",
+  ],
+  overviewTitle: "Overview",
+  introduction:
+    "CSI disinfection, is the process of releasing ions to a water supply with the purpose of neutralizing harmful organisms, most commonly for Legionella. The concept was devised & developed by NASA in the 60's, & gradually made its presence into civilian applications for its effect on pathogens.",
+  certifications: [
+    { title: "ISO 9001:2015", url: "/certifications/dosita-iso-9001-2027.pdf" },
+    { title: "WRAS", url: "/certifications/csi-wras-certificate-2029.pdf" },
+    { title: "UDEM", url: "/certifications/csi-udem-2025.pdf" },
+    { title: "NSF", url: "/certifications/csi-nsf-test-report-2024.pdf" },
+  ],
+  brochures: [
+    { title: "IonSafe Brochure 1.0", url: "/manuals/ionsafe-brochure-1-0.pdf" },
+  ],
+  productImages: [
+    csiSystemsDrinking2,
+    csiSystemsDrinking4,
+    csiSystemsDrinking3,
+    csiSystemsDrinking5,
+  ],
+};
 
 export const drinkingWaterProducts: Product[] = [
   {
@@ -76,46 +118,7 @@ Dosita has been a developer & supplier of UV disinfection systems since 2000, wi
       uvSystemsDrinking5,
     ],
   },
-  {
-    id: "copper-silver-ionization-drinking",
-    title: "Copper Silver Ionization",
-    description: "Eco-friendly copper-silver ionization systems for natural drinking water sanitization using mineral technology.",
-    image: csiSystemsDrinking1,
-    icon: <Atom className="h-8 w-8 text-primary" />,
-    features: [
-      "Natural mineral sanitization",
-      "Long-lasting copper electrodes",
-      "Mineral-based water treatment", 
-      "Reduced chemical requirements",
-      "Automatic ion level control",
-      "Environmentally friendly process"
-    ],
-    specificationBullets: [
-      "Our product range adopts Cu:AG 90:10, or 99.99 pure copper, depending on the requirements.",
-      "Our vessels are SS316, & tested to 10 bars.",
-      "Programmable controller for voltage, amperes, & time.",
-      "Flow meters & BMS control meters are available options.",
-      "Standard range (see brochure) & custom made units.",
-    ],
-    overviewTitle: "Introduction",
-    introduction:
-      "CSI disinfection, is the process of releasing ions to a water supply with the purpose of neutralizing harmful organisms, most commonly for Legionella. The concept was devised & developed by NASA in the 60's, & gradually made its presence into civilian applications for its effect on pathogens.",
-    certifications: [
-      { title: "ISO 9001:2015", url: "/certifications/dosita-iso-9001-2027.pdf" },
-      { title: "WRAS", url: "/certifications/csi-wras-certificate-2029.pdf" },
-      { title: "UDEM", url: "/certifications/csi-udem-2025.pdf" },
-      { title: "NSF", url: "/certifications/csi-nsf-test-report-2024.pdf" },
-    ],
-    brochures: [
-      { title: "IonSafe Brochure 1.0", url: "/manuals/ionsafe-brochure-1-0.pdf" },
-    ],
-    productImages: [
-      csiSystemsDrinking2,
-      csiSystemsDrinking4,
-      csiSystemsDrinking3,
-      csiSystemsDrinking5,
-    ],
-  }
+  copperSilverIonizationProduct,
 ];
 
 export const swimmingPoolProducts: Product[] = [
@@ -123,7 +126,7 @@ export const swimmingPoolProducts: Product[] = [
     id: "electrical-heater",
     title: "Electrical Heater",
     description: "Efficient electric heating systems for optimal swimming pool water temperature control in all applications.",
-    image: electricHeaters,
+    image: heaterSystems1,
     icon: <Thermometer className="h-8 w-8 text-primary" />,
     features: [
       "Energy efficient heating elements",
@@ -133,26 +136,27 @@ export const swimmingPoolProducts: Product[] = [
       "Safety shutdown systems",
       "Modular design options"
     ],
-    specifications: {
-      "Power": "5-500 kW available",
-      "Voltage": "208-480V, 3-phase",
-      "Material": "316L stainless steel",
-      "Control": "Digital PID"
-    },
-    introduction: "Electrical pool heaters offer precise temperature control and rapid heating capabilities, ensuring comfortable swimming conditions year-round. Built with premium stainless steel and advanced digital controls for maximum reliability and performance.",
-    certifications: [
-      { title: "UL Listed - Electrical Safety", url: "/manuals/product-manual.pdf" },
-      { title: "NSF/ANSI Standard 50 Certified", url: "/manuals/product-manual.pdf" },
-      { title: "CE Marking - European Conformity", url: "/manuals/product-manual.pdf" },
-      { title: "CSA Certified - Canadian Standards", url: "/manuals/product-manual.pdf" },
-      { title: "ISO 9001:2015 Quality Management", url: "/manuals/product-manual.pdf" },
+    introduction:
+      "Electrical heaters are the Ideal choice for maintaining adequate water temperatures for your swimming pool or Jacuzzi all year long, provided with low maintenance & high-quality components.",
+    specificationBullets: [
+      "Heavy duty body made from marine grade SS316.",
+      "Highly corrosion & chemical resistant heating elements made from pure Titanium.",
+      "3-phase, 380V connection; with single phase models available for some sizes.",
+      "50Hz frequency, with the option for 60Hz partially available.",
+      "Model range from (9 – 24)kW.",
+      "Multiple levels of protection for every unit including temperature controllers, thermal protection, & flow switchs, proper electrical connection on site to be administrated by competent technicians.",
+      "Digital & analog models available.",
     ],
-    manuals: [
-      { title: "Installation Guide", url: "/manuals/product-manual.pdf" },
-      { title: "Electrical Schematic", url: "/manuals/product-manual.pdf" },
-      { title: "Service Manual", url: "/manuals/product-manual.pdf" }
+    safetyInstallationTitle: "Safety & Installation Notes",
+    safetyInstallationBullets: [
+      "It is the customer's responsibility to select a suitable ELCB for further protection against electrical leakage.",
+      "It is the customer's responsibility to select the proper full gauge copper cable with the minimum size as recommended by the supplier.",
+      "The heaters size recommended by the manufacturer is based on fixed parameters (such as a 72 hour period to achieve the desired heat, & DT of 17°C), other parameters may apply for proper heating, such as outdoor weather conditions, & the swimming pool surface area, air conditioning for indoor pools. The customer is responsible for requesting the proper heater size.",
     ],
-    productImages: [electricHeaters, poolEquipment]
+    brochures: [
+      { title: "StratoHeat Brochure 1.0", url: "/manuals/stratoheat-brochure-1-0.pdf" },
+    ],
+    productImages: [heaterSystems2],
   },
   {
     id: "uv-systems-pool",
@@ -188,38 +192,5 @@ export const swimmingPoolProducts: Product[] = [
     ],
     productImages: [uvSystems, poolEquipment]
   },
-  {
-    id: "copper-silver-pool",
-    title: "Copper Silver",
-    description: "Eco-friendly copper-silver ionization systems for natural swimming pool sanitization using mineral technology.",
-    image: copperIonization,
-    icon: <Atom className="h-8 w-8 text-primary" />,
-    features: [
-      "Natural mineral sanitization",
-      "Long-lasting copper electrodes",
-      "Mineral-based water treatment", 
-      "Reduced chemical requirements",
-      "Automatic ion level control",
-      "Environmentally friendly process"
-    ],
-    specifications: {
-      "Ion Output": "0.2-2.0 ppm Cu",
-      "Electrode Life": "1-3 years",
-      "Power": "12-24V DC",
-      "Material": "99.9% pure copper"
-    },
-    introduction: "Copper Silver ionization technology provides a natural alternative to traditional pool chemicals, delivering effective sanitization through mineral ions. This system significantly reduces chlorine usage while maintaining crystal-clear, safe pool water.",
-    certifications: [
-      { title: "EPA Registered for Pool Treatment", url: "/manuals/product-manual.pdf" },
-      { title: "NSF/ANSI Standard 50 Certified", url: "/manuals/product-manual.pdf" },
-      { title: "ISO 9001:2015 Quality Management", url: "/manuals/product-manual.pdf" },
-      { title: "CE Marking - European Conformity", url: "/manuals/product-manual.pdf" },
-    ],
-    manuals: [
-      { title: "System Installation Guide", url: "/manuals/product-manual.pdf" },
-      { title: "User Manual", url: "/manuals/product-manual.pdf" },
-      { title: "Electrode Care Guide", url: "/manuals/product-manual.pdf" }
-    ],
-    productImages: [copperIonization, ozoneGenerator]
-  },
+  copperSilverIonizationProduct,
 ];
