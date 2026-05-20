@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
@@ -8,67 +7,60 @@ import { ArrowRight } from "lucide-react";
 
 const DrinkingWater = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <Navigation />
-      
-      {/* Hero Section */}
-      <section className="pt-20 pb-16 bg-gradient-to-b from-background to-secondary">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h1 className="text-5xl md:text-7xl font-bold text-engineering-navy mb-6 uppercase tracking-tight">
-              Drinking Water
-              <span className="block text-primary">Pure & Safe</span>
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
-              Advanced drinking water treatment systems ensuring the highest standards of water quality and safety for residential and commercial applications.
-            </p>
-          </div>
+
+      {/* Hero */}
+      <section className="pt-40 pb-24 sm:pt-48 sm:pb-32">
+        <div className="mx-auto max-w-5xl px-6 text-center">
+          <h1 className="text-5xl font-black uppercase leading-[0.9] tracking-tighter text-engineering-navy sm:text-7xl lg:text-8xl">
+            Drinking
+            <br />
+            <span className="text-primary">Water</span>
+          </h1>
+          <p className="mx-auto mt-8 max-w-2xl text-lg font-medium leading-relaxed text-muted-foreground sm:text-xl">
+            Advanced treatment systems ensuring the highest standards of water quality and safety.
+          </p>
         </div>
       </section>
 
       {/* Products Grid */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="pb-32">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {drinkingWaterProducts.map((product) => (
-              <Card 
+              <div
                 key={product.id}
-                className="group hover:shadow-professional transition-all duration-300 hover:-translate-y-2 border-0 shadow-card bg-gradient-to-br from-card to-secondary/20 flex flex-col"
+                className="group relative flex h-full flex-col overflow-hidden rounded-[2.5rem] bg-white p-8 border border-border shadow-sm transition-all duration-500 hover:shadow-2xl"
               >
-                <CardHeader className="pb-4">
-                  <div className="relative h-48 rounded-lg overflow-hidden mb-4">
-                    <img 
-                      src={product.image} 
-                      alt={product.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-engineering-navy/60 to-transparent"></div>
-                    <div className="absolute bottom-4 left-4">
-                      {product.icon}
-                    </div>
+                <div className="relative mb-8 h-56 w-full overflow-hidden rounded-2xl bg-gradient-to-br from-secondary to-muted">
+                  <img
+                    src={product.image}
+                    alt={product.title}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute bottom-3 left-3 rounded-full bg-white/90 p-3 text-primary backdrop-blur-sm">
+                    {product.icon}
                   </div>
-                  <CardTitle className="text-2xl text-engineering-navy group-hover:text-primary transition-colors">
-                    {product.title}
-                  </CardTitle>
-                </CardHeader>
-                
-                <CardContent className="space-y-6 flex flex-col flex-grow">
-                  <p className="text-muted-foreground leading-relaxed">
-                    {product.description}
-                  </p>
-                  
-                  <Button 
-                    variant="industrial" 
-                    className="w-full group-hover:bg-primary group-hover:text-white mt-auto"
-                    asChild
-                  >
-                    <Link to={`/products/${product.id}`}>
-                      Learn More
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
+                </div>
+
+                <h3 className="mb-4 text-2xl md:text-3xl font-bold text-engineering-navy">
+                  {product.title}
+                </h3>
+                <p className="mb-8 leading-relaxed text-muted-foreground">
+                  {product.description}
+                </p>
+
+                <Button
+                  asChild
+                  className="mt-auto w-full rounded-full bg-engineering-navy py-6 font-bold text-white transition-all hover:bg-primary hover:scale-[1.02] active:scale-95"
+                >
+                  <Link to={`/products/${product.id}`}>
+                    Learn More
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
             ))}
           </div>
         </div>

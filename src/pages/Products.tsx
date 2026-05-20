@@ -1,73 +1,66 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
 import { ArrowRight, Droplets, Waves } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const Products = () => {
   const categories = [
     {
       id: "drinking-water",
       title: "Drinking Water",
+      tagline: "Pure. Safe. Engineered.",
       path: "/products/drinking-water",
-      icon: <Droplets className="h-12 w-12 text-primary" />
+      icon: <Droplets className="h-16 w-16 text-primary" strokeWidth={1.25} />,
     },
     {
       id: "swimming-pool",
-      title: "Swimming Pool Products",
+      title: "Swimming Pool",
+      tagline: "Clarity in every drop.",
       path: "/products/swimming-pool",
-      icon: <Waves className="h-12 w-12 text-primary" />
-    }
+      icon: <Waves className="h-16 w-16 text-primary" strokeWidth={1.25} />,
+    },
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <Navigation />
-      
-      {/* Hero Section */}
-      <section className="pt-20 pb-16 bg-gradient-to-b from-background to-secondary">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h1 className="text-5xl md:text-7xl font-bold text-engineering-navy mb-6 uppercase tracking-tight">
-              Professional Equipment
-              <span className="block text-primary">Complete Solutions</span>
-            </h1>
-          </div>
+
+      {/* Hero */}
+      <section className="pt-40 pb-24 sm:pt-48 sm:pb-32">
+        <div className="mx-auto max-w-5xl px-6 text-center">
+          <h1 className="text-5xl font-black uppercase leading-[0.9] tracking-tighter text-engineering-navy sm:text-7xl lg:text-8xl">
+            Professional
+            <br />
+            <span className="text-primary">Equipment</span>
+          </h1>
+          <p className="mx-auto mt-8 max-w-2xl text-lg font-medium leading-relaxed text-muted-foreground sm:text-xl">
+            Complete solutions for water treatment, engineered with uncompromising precision.
+          </p>
         </div>
       </section>
 
-      {/* Categories Grid */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      {/* Categories */}
+      <section className="pb-32">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="grid gap-8 md:grid-cols-2">
             {categories.map((category) => (
-              <Card 
+              <Link
                 key={category.id}
-                className="group hover:shadow-professional transition-all duration-300 hover:-translate-y-2 border-0 shadow-card bg-gradient-to-br from-card to-secondary/20 flex flex-col"
+                to={category.path}
+                className="group relative flex flex-col overflow-hidden rounded-[2.5rem] bg-secondary p-12 transition-all duration-500 hover:shadow-2xl"
               >
-                <CardHeader className="pb-4">
-                  <div className="flex items-center justify-center mb-6 p-8 bg-secondary/50 rounded-lg">
-                    {category.icon}
-                  </div>
-                  <CardTitle className="text-3xl text-engineering-navy group-hover:text-primary transition-colors text-center">
-                    {category.title}
-                  </CardTitle>
-                </CardHeader>
-                
-                <CardContent className="space-y-6 flex flex-col flex-grow">
-                  <Button 
-                    variant="industrial" 
-                    className="w-full group-hover:bg-primary group-hover:text-white mt-auto"
-                    asChild
-                  >
-                    <Link to={category.path}>
-                      View Products
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
+                <div className="mb-12 flex h-56 items-center justify-center rounded-2xl bg-white">
+                  {category.icon}
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-tight text-engineering-navy">
+                  {category.title}
+                </h2>
+                <p className="mt-3 text-base text-muted-foreground">{category.tagline}</p>
+                <div className="mt-8 inline-flex items-center text-sm font-bold uppercase tracking-widest text-primary">
+                  View Products
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </div>
+              </Link>
             ))}
           </div>
         </div>
