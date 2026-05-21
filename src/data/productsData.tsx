@@ -1,5 +1,3 @@
-import poolEquipment from "@/assets/pool-equipment.jpg";
-import uvSystems from "@/assets/uv-systems.jpg";
 import uvSystemsDrinking1 from "@/assets/uv-systems-drinking-1.png";
 import uvSystemsDrinking2 from "@/assets/uv-systems-drinking-2.png";
 import uvSystemsDrinking3 from "@/assets/uv-systems-drinking-3.png";
@@ -10,6 +8,8 @@ import csiSystemsDrinking2 from "@/assets/csi-systems-drinking-2.png";
 import csiSystemsDrinking3 from "@/assets/csi-systems-drinking-3.png";
 import csiSystemsDrinking4 from "@/assets/csi-systems-drinking-4.png";
 import csiSystemsDrinking5 from "@/assets/csi-systems-drinking-5.png";
+import dosuvSystems1 from "@/assets/dosuv-systems-1.png";
+import dosuvSystems2 from "@/assets/dosuv-systems-2.png";
 import heaterSystems1 from "@/assets/heater-systems-1.png";
 import heaterSystems2 from "@/assets/heater-systems-2.png";
 import { Zap, Atom, Thermometer } from "lucide-react";
@@ -32,6 +32,58 @@ export interface Product {
   safetyInstallationTitle?: string;
   productImages?: string[];
 }
+
+export const uvSystemsProduct: Product = {
+  id: "uv-systems-drinking",
+  title: "UV Systems",
+  description: "Advanced ultraviolet disinfection systems for chemical-free drinking water treatment and pathogen elimination.",
+  image: uvSystemsDrinking1,
+  icon: <Zap className="h-8 w-8 text-primary" />,
+  features: [
+    "UV-C technology for disinfection",
+    "No chemical residue or byproducts",
+    "Low maintenance requirements",
+    "Automatic intensity monitoring",
+    "Energy efficient LED options",
+    "Real-time performance tracking"
+  ],
+  specifications: {
+    "Lamps": "Our product range utilizes the low-pressure lamps.",
+    "Dosage": "The dosage of our product range is (30 – 40) mJ/cm².",
+    "Tested pressure": "The tested pressure is 10 bars for the UVSafe range.",
+    "UV lamp life": "The expected life of the UV lamps is (8,000 – 10,000) hours.",
+    "Accessories": "Our product range includes UV intensity monitoring.",
+    "Options": "Optional features include BMS, flow switches and an hour counter.",
+  },
+  introduction: `UV disinfection systems refer to the application of Ultra Violet radiation, ideally at 254nm wavelength, to neutralize pollutant organisms such as: viruses, bacteria, & fungi; in the air, water, or on surfaces intended for disinfection. The disinfection depends largely on the radiation dose & the exposure time.
+
+This process leaves no trace in or on the disinfected medium or surface, & creates no byproducts
+
+Dosita has been a developer & supplier of UV disinfection systems since 2000, with a product ranges in air disinfection, potable water, & waste water, for projects in residential, commercial, & industrial facilities.`,
+  certifications: [
+    { title: "ISO 9001:2015", url: "/certifications/dosita-iso-9001-2027.pdf" },
+    { title: "WRAS", url: "/certifications/uv-wras-certificate-2029.pdf" },
+    { title: "UDEM", url: "/certifications/uv-udem-2025.pdf" },
+    { title: "NSF", url: "/certifications/uv-nsf-test-report-2024.pdf" },
+  ],
+  manuals: [
+    { title: "UVSafe Brochure", url: "/manuals/uvisafe-brochure-1-5.pdf" },
+  ],
+  productImages: [
+    uvSystemsDrinking2,
+    uvSystemsDrinking3,
+    uvSystemsDrinking4,
+    uvSystemsDrinking5,
+  ],
+};
+
+export const dosuvSystemsPoolProduct: Product = {
+  ...uvSystemsProduct,
+  id: "dosuv-systems-pool",
+  title: "DOSUV Systems",
+  image: dosuvSystems1,
+  productImages: [dosuvSystems2],
+};
 
 export const copperSilverIonizationProduct: Product = {
   id: "copper-silver-ionization-drinking",
@@ -75,49 +127,7 @@ export const copperSilverIonizationProduct: Product = {
 };
 
 export const drinkingWaterProducts: Product[] = [
-  {
-    id: "uv-systems-drinking",
-    title: "UV Systems",
-    description: "Advanced ultraviolet disinfection systems for chemical-free drinking water treatment and pathogen elimination.",
-    image: uvSystemsDrinking1,
-    icon: <Zap className="h-8 w-8 text-primary" />,
-    features: [
-      "UV-C technology for disinfection",
-      "No chemical residue or byproducts",
-      "Low maintenance requirements",
-      "Automatic intensity monitoring",
-      "Energy efficient LED options",
-      "Real-time performance tracking"
-    ],
-    specifications: {
-      "Lamps": "Our product range utilizes the low-pressure lamps.",
-      "Dosage": "The dosage of our product range is (30 – 40) mJ/cm².",
-      "Tested pressure": "The tested pressure is 10 bars for the UVSafe range.",
-      "UV lamp life": "The expected life of the UV lamps is (8,000 – 10,000) hours.",
-      "Accessories": "Our product range includes UV intensity monitoring.",
-      "Options": "Optional features include BMS, flow switches and an hour counter.",
-    },
-    introduction: `UV disinfection systems refer to the application of Ultra Violet radiation, ideally at 254nm wavelength, to neutralize pollutant organisms such as: viruses, bacteria, & fungi; in the air, water, or on surfaces intended for disinfection. The disinfection depends largely on the radiation dose & the exposure time.
-
-This process leaves no trace in or on the disinfected medium or surface, & creates no byproducts
-
-Dosita has been a developer & supplier of UV disinfection systems since 2000, with a product ranges in air disinfection, potable water, & waste water, for projects in residential, commercial, & industrial facilities.`,
-    certifications: [
-      { title: "ISO 9001:2015", url: "/certifications/dosita-iso-9001-2027.pdf" },
-      { title: "WRAS", url: "/certifications/uv-wras-certificate-2029.pdf" },
-      { title: "UDEM", url: "/certifications/uv-udem-2025.pdf" },
-      { title: "NSF", url: "/certifications/uv-nsf-test-report-2024.pdf" },
-    ],
-    manuals: [
-      { title: "UVSafe Brochure", url: "/manuals/uvisafe-brochure-1-5.pdf" },
-    ],
-    productImages: [
-      uvSystemsDrinking2,
-      uvSystemsDrinking3,
-      uvSystemsDrinking4,
-      uvSystemsDrinking5,
-    ],
-  },
+  uvSystemsProduct,
   copperSilverIonizationProduct,
 ];
 
@@ -158,39 +168,6 @@ export const swimmingPoolProducts: Product[] = [
     ],
     productImages: [heaterSystems2],
   },
-  {
-    id: "uv-systems-pool",
-    title: "UV System",
-    description: "Advanced ultraviolet disinfection systems for chemical-free swimming pool water treatment and pathogen elimination.",
-    image: uvSystems,
-    icon: <Zap className="h-8 w-8 text-primary" />,
-    features: [
-      "UV-C technology for disinfection",
-      "No chemical residue or byproducts",
-      "Low maintenance requirements",
-      "Automatic intensity monitoring",
-      "Energy efficient LED options",
-      "Real-time performance tracking"
-    ],
-    specifications: {
-      "UV Dose": "30-300 mJ/cm²",
-      "Lamp Type": "Low/Medium pressure",
-      "Power": "120-480V available",
-      "Material": "316L stainless steel"
-    },
-    introduction: "Pool UV Systems deliver superior water quality through advanced ultraviolet technology, reducing chlorine demand and eliminating harmful microorganisms. Perfect for commercial and residential pools seeking eco-friendly water treatment solutions.",
-    certifications: [
-      { title: "NSF/ANSI Standard 50 - Pool & Spa Equipment", url: "/manuals/product-manual.pdf" },
-      { title: "CE Marking - European Conformity", url: "/manuals/product-manual.pdf" },
-      { title: "ISO 9001:2015 Quality Management", url: "/manuals/product-manual.pdf" },
-      { title: "UL Listed - Safety Certification", url: "/manuals/product-manual.pdf" },
-    ],
-    manuals: [
-      { title: "Installation Manual", url: "/manuals/product-manual.pdf" },
-      { title: "Operation Guide", url: "/manuals/product-manual.pdf" },
-      { title: "Lamp Replacement Guide", url: "/manuals/product-manual.pdf" }
-    ],
-    productImages: [uvSystems, poolEquipment]
-  },
+  dosuvSystemsPoolProduct,
   copperSilverIonizationProduct,
 ];
