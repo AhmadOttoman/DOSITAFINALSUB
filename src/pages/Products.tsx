@@ -8,14 +8,12 @@ const Products = () => {
     {
       id: "drinking-water",
       title: "Drinking Water",
-      tagline: "Pure. Safe. Engineered.",
       path: "/products/drinking-water",
       icon: <Droplets className="h-16 w-16 text-primary" strokeWidth={1.25} />,
     },
     {
       id: "swimming-pool",
       title: "Swimming Pool",
-      tagline: "Clarity in every drop.",
       path: "/products/swimming-pool",
       icon: <Waves className="h-16 w-16 text-primary" strokeWidth={1.25} />,
     },
@@ -28,7 +26,7 @@ const Products = () => {
       {/* Hero */}
       <section className="pt-40 pb-24 sm:pt-48 sm:pb-32">
         <div className="mx-auto max-w-5xl px-6 text-center">
-          <h1 className="text-5xl font-black uppercase leading-[0.9] tracking-tighter text-engineering-navy sm:text-7xl lg:text-8xl">
+          <h1 className="mb-4 text-4xl font-black uppercase tracking-tighter text-engineering-navy md:text-6xl">
             Professional
             <br />
             <span className="text-primary">Equipment</span>
@@ -55,7 +53,6 @@ const Products = () => {
                 <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-tight text-engineering-navy">
                   {category.title}
                 </h2>
-                <p className="mt-3 text-base text-muted-foreground">{category.tagline}</p>
                 <div className="mt-8 inline-flex items-center text-sm font-bold uppercase tracking-widest text-primary">
                   View Products
                 </div>

@@ -80,7 +80,7 @@ Dosita has been a developer & supplier of UV disinfection systems since 2000, wi
 export const dosuvSystemsPoolProduct: Product = {
   ...uvSystemsProduct,
   id: "dosuv-systems-pool",
-  title: "DOSUV Systems",
+  title: "UV Systems",
   image: dosuvSystems1,
   productImages: [dosuvSystems2],
   manuals: [

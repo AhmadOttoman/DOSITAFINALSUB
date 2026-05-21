@@ -32,11 +32,11 @@ const ProductsSection = () => {
   return (
     <section id="products" className="py-32 bg-background">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-20">
-          <h2 className="text-4xl md:text-6xl font-black uppercase leading-none tracking-tighter text-engineering-navy mb-4">
+        <div className="mb-20 text-center">
+          <h2 className="mb-4 text-4xl font-black uppercase tracking-tighter text-engineering-navy md:text-6xl">
             Products
             <br />
-            <span className="text-primary text-3xl md:text-5xl">Excellence in every detail</span>
+            <span className="text-primary">Excellence in every detail</span>
           </h2>
         </div>
 

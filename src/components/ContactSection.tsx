@@ -10,7 +10,7 @@ const ContactSection = () => {
       <div className="max-w-7xl mx-auto">
         {/* Centered heading */}
         <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-6xl font-black uppercase mb-6 tracking-tighter text-engineering-navy">
+          <h2 className="mb-4 text-4xl font-black uppercase tracking-tighter text-engineering-navy md:text-6xl">
             Get in
             <br />
             <span className="text-primary">Touch</span>
