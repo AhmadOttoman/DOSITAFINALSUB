@@ -84,7 +84,7 @@ export const dosuvSystemsPoolProduct: Product = {
   image: dosuvSystems1,
   productImages: [dosuvSystems2],
   manuals: [
-    { title: "DosUV Brochure", url: "/manuals/uvisafe-brochure-1-5.pdf" },
+    { title: "DosUV Brochure", url: "/manuals/dosuv-brochure-1-2.pdf" },
   ],
 };
 
