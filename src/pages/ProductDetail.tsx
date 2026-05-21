@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { ProductImageGallery } from "@/components/ProductImageGallery";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { drinkingWaterProducts, swimmingPoolProducts } from "@/data/productsData.tsx";
 
 const ProductDetail = () => {
@@ -25,7 +24,6 @@ const ProductDetail = () => {
             onClick={() => navigate("/products")}
             className="mt-8 rounded-full bg-engineering-navy px-8 py-6 font-bold text-white hover:bg-primary"
           >
-            <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Products
           </Button>
         </div>
@@ -51,7 +49,6 @@ const ProductDetail = () => {
             variant="ghost"
             className="mb-12 rounded-full font-medium"
           >
-            <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Products
           </Button>
 
@@ -94,29 +91,32 @@ const ProductDetail = () => {
               <h2 className="mb-12 text-3xl md:text-5xl font-black uppercase tracking-tighter text-engineering-navy">
                 Specifications
               </h2>
-              <div className="rounded-[2.5rem] bg-secondary p-10 md:p-12">
-                <div className="space-y-1">
-                  {product.specificationBullets?.length ? (
-                    product.specificationBullets.map((item, index) => (
-                      <p
+              <div className="rounded-[2.5rem] bg-secondary px-5 py-6 sm:px-8 sm:py-8 md:px-10 md:py-10 lg:px-12 lg:py-12">
+                {product.specificationBullets?.length ? (
+                  <ul className="divide-y divide-border/60">
+                    {product.specificationBullets.map((item, index) => (
+                      <li
                         key={index}
-                        className="border-b border-border/60 py-4 text-base leading-relaxed text-foreground/80 last:border-0 md:text-lg"
+                        className="py-5 text-[0.9375rem] leading-[1.65] text-foreground/85 first:pt-0 last:pb-0 sm:py-6 sm:text-base md:text-lg md:leading-relaxed"
                       >
-                        • {item}
-                      </p>
-                    ))
-                  ) : (
-                    Object.entries(product.specifications ?? {}).map(([key, value]) => (
+                        <span className="mr-2 text-primary">•</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <dl className="divide-y divide-border/60">
+                    {Object.entries(product.specifications ?? {}).map(([key, value]) => (
                       <div
                         key={key}
-                        className="flex items-center justify-between border-b border-border/60 py-4 last:border-0"
+                        className="flex flex-col gap-2 py-5 first:pt-0 last:pb-0 sm:flex-row sm:items-start sm:justify-between sm:gap-8 sm:py-6"
                       >
-                        <span className="font-medium text-muted-foreground">{key}</span>
-                        <span className="font-semibold text-engineering-navy">{value}</span>
+                        <dt className="shrink-0 font-medium text-muted-foreground sm:max-w-[40%]">{key}</dt>
+                        <dd className="font-semibold leading-relaxed text-engineering-navy sm:text-right">{value}</dd>
                       </div>
-                    ))
-                  )}
-                </div>
+                    ))}
+                  </dl>
+                )}
               </div>
             </section>
           )}
@@ -127,17 +127,18 @@ const ProductDetail = () => {
               <h2 className="mb-12 text-3xl md:text-5xl font-black uppercase tracking-tighter text-engineering-navy">
                 {product.safetyInstallationTitle ?? "Safety & Installation Notes"}
               </h2>
-              <div className="rounded-[2.5rem] bg-secondary p-10 md:p-12">
-                <div className="space-y-1">
+              <div className="rounded-[2.5rem] bg-secondary px-5 py-6 sm:px-8 sm:py-8 md:px-10 md:py-10 lg:px-12 lg:py-12">
+                <ul className="divide-y divide-border/60">
                   {product.safetyInstallationBullets.map((item, index) => (
-                    <p
+                    <li
                       key={index}
-                      className="border-b border-border/60 py-4 text-base leading-relaxed text-foreground/80 last:border-0 md:text-lg"
+                      className="py-5 text-[0.9375rem] leading-[1.65] text-foreground/85 first:pt-0 last:pb-0 sm:py-6 sm:text-base md:text-lg md:leading-relaxed"
                     >
-                      • {item}
-                    </p>
+                      <span className="mr-2 text-primary">•</span>
+                      <span>{item}</span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             </section>
           ) : null}
@@ -158,7 +159,6 @@ const ProductDetail = () => {
                     className="group flex items-center justify-between rounded-2xl bg-secondary p-6 transition-all hover:bg-white hover:shadow-lg"
                   >
                     <span className="font-medium text-engineering-navy">{item.title}</span>
-                    <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
                   </a>
                 ))}
               </div>

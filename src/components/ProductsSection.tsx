@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
-import { ArrowRight } from "lucide-react";
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { drinkingWaterProducts, swimmingPoolProducts } from "@/data/productsData.tsx";
@@ -88,10 +87,7 @@ const ProductsSection = () => {
                         asChild
                         className="w-full py-6 rounded-full bg-engineering-navy text-white font-bold hover:bg-primary hover:scale-[1.02] active:scale-95 transition-all mt-auto"
                       >
-                        <Link to={`/products/${product.id}`}>
-                          Learn More
-                          <ArrowRight className="ml-2 h-4 w-4" />
-                        </Link>
+                        <Link to={`/products/${product.id}`}>Learn More</Link>
                       </Button>
                     </CardContent>
                   </Card>
@@ -105,10 +101,7 @@ const ProductsSection = () => {
               asChild
               className="px-8 py-6 rounded-full border-2 border-engineering-navy bg-transparent text-engineering-navy font-bold text-sm uppercase tracking-widest hover:bg-secondary"
             >
-              <Link to="/products">
-                View All Products
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
+              <Link to="/products">View All Products</Link>
             </Button>
           </div>
         </div>

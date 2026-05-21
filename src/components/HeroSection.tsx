@@ -2,7 +2,7 @@ const HeroSection = () => {
   return (
     <section id="home" className="relative overflow-hidden bg-background pt-32 pb-24 sm:pt-40 sm:pb-32">
       <div className="mx-auto flex min-h-[calc(100vh-8rem)] max-w-6xl flex-col items-center justify-center px-6 text-center">
-        <h1 className="text-5xl font-black uppercase leading-[0.9] tracking-tighter text-engineering-navy sm:text-7xl lg:text-9xl">
+        <h1 className="text-[3.375rem] font-black uppercase leading-[0.9] tracking-tighter text-engineering-navy md:text-[5.625rem]">
           Unmatched
           <br />
           Legacy in

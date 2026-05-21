@@ -4,12 +4,10 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, Expand, Minimize2, X } from "lucide-react";
+import { Expand, Minimize2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type ProductImageGalleryProps = {
@@ -133,20 +131,6 @@ function FullscreenViewer({
                 </CarouselItem>
               ))}
             </CarouselContent>
-            {hasMultiple ? (
-              <>
-                <CarouselPrevious
-                  variant="ghost"
-                  className="absolute left-2 top-1/2 z-[325] h-12 w-12 -translate-y-1/2 rounded-full bg-white/10 text-white backdrop-blur-md hover:bg-white/20 hover:text-white sm:left-6 [&_svg]:text-white"
-                  aria-label="Previous image"
-                />
-                <CarouselNext
-                  variant="ghost"
-                  className="absolute right-2 top-1/2 z-[325] h-12 w-12 -translate-y-1/2 rounded-full bg-white/10 text-white backdrop-blur-md hover:bg-white/20 hover:text-white sm:right-6 [&_svg]:text-white"
-                  aria-label="Next image"
-                />
-              </>
-            ) : null}
           </Carousel>
         </div>
 
@@ -354,33 +338,6 @@ export function ProductImageGallery({
               </div>
             ) : null}
 
-            {/* Prev/next arrows (visible on hover, always on touch) */}
-            {hasMultiple ? (
-              <>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    goPrev();
-                  }}
-                  className="absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-engineering-navy opacity-0 shadow-md backdrop-blur-md transition-all hover:bg-white hover:scale-105 group-hover:opacity-100 focus-visible:opacity-100 md:left-4"
-                  aria-label="Previous image"
-                >
-                  <ChevronLeft className="h-5 w-5" />
-                </button>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    goNext();
-                  }}
-                  className="absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-engineering-navy opacity-0 shadow-md backdrop-blur-md transition-all hover:bg-white hover:scale-105 group-hover:opacity-100 focus-visible:opacity-100 md:right-4"
-                  aria-label="Next image"
-                >
-                  <ChevronRight className="h-5 w-5" />
-                </button>
-              </>
-            ) : null}
           </div>
 
           {/* Mobile thumbnail strip */}

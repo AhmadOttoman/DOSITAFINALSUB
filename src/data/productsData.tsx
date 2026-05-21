@@ -83,6 +83,9 @@ export const dosuvSystemsPoolProduct: Product = {
   title: "DOSUV Systems",
   image: dosuvSystems1,
   productImages: [dosuvSystems2],
+  manuals: [
+    { title: "DosUV Brochure", url: "/manuals/uvisafe-brochure-1-5.pdf" },
+  ],
 };
 
 export const copperSilverIonizationProduct: Product = {

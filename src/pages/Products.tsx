@@ -1,7 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
-import { ArrowRight, Droplets, Waves } from "lucide-react";
+import { Droplets, Waves } from "lucide-react";
 
 const Products = () => {
   const categories = [
@@ -58,7 +58,6 @@ const Products = () => {
                 <p className="mt-3 text-base text-muted-foreground">{category.tagline}</p>
                 <div className="mt-8 inline-flex items-center text-sm font-bold uppercase tracking-widest text-primary">
                   View Products
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </div>
               </Link>
             ))}

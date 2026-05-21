@@ -3,7 +3,6 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
 import { swimmingPoolProducts } from "@/data/productsData.tsx";
-import { ArrowRight } from "lucide-react";
 
 const SwimmingPool = () => {
   return (
@@ -55,10 +54,7 @@ const SwimmingPool = () => {
                   asChild
                   className="mt-auto w-full rounded-full bg-engineering-navy py-6 font-bold text-white transition-all hover:bg-primary hover:scale-[1.02] active:scale-95"
                 >
-                  <Link to={`/products/${product.id}`}>
-                    Learn More
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
+                  <Link to={`/products/${product.id}`}>Learn More</Link>
                 </Button>
               </div>
             ))}

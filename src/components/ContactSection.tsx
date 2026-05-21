@@ -59,7 +59,7 @@ const ContactSection = () => {
 
         {/* Form */}
         <div className="max-w-2xl mx-auto bg-secondary rounded-[2.5rem] p-8 md:p-10 text-engineering-navy">
-          <h3 className="text-2xl font-bold mb-8 text-center">Send Us a Message</h3>
+          <h3 className="text-2xl font-bold mb-8 text-center">Send Us A Message</h3>
           <form className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
@@ -72,7 +72,7 @@ const ContactSection = () => {
                 <Label htmlFor="company" className="text-xs font-bold uppercase tracking-widest opacity-60">
                   Company
                 </Label>
-                <Input id="company" placeholder="Your Company" className="bg-background border-none rounded-xl p-4 h-auto" />
+                <Input id="company" placeholder="Company" className="bg-background border-none rounded-xl p-4 h-auto" />
               </div>
             </div>
 
