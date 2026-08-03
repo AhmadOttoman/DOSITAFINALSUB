@@ -1,5 +1,0 @@
----
-deployment:
-  tasks:
-    - export DEPLOYPATH=/home/dosittno/public_html/
-    - /bin/cp -R css images index.html $DEPLOYPATH
