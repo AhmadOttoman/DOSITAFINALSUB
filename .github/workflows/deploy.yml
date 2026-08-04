@@ -1,12 +1,21 @@
-steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v3
-
-    - name: 📂 Sync files to Namecheap
+name: Deploy to Preview
+on:
+  push:
+    branches:
+      - main
+jobs:
+  ftp-deploy:
+    name: FTP Sync to cPanel
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get the latest code
+      uses: actions/checkout@v4
+    
+    - name: Upload to Namecheap
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./public/       # <-- The trailing slash here is your "/*"
-        server-dir: ./public_html/ # <-- Drops files directly where Namecheap wants them
+        server-dir: ./public_html/preview/
+        
