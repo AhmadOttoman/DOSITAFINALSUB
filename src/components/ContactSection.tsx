@@ -1,10 +1,84 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Send, MapPin, Phone } from "lucide-react";
+import { Loader2, Send, MapPin, Phone } from "lucide-react";
+
+const CONTACT_EMAIL = "ahmodi094@gmail.com";
+
+const contactFormSchema = z.object({
+  name: z.string().min(1, "Full name is required"),
+  company: z.string().optional(),
+  email: z.string().email("Please enter a valid email address"),
+  message: z.string().min(1, "Message is required"),
+});
+
+type ContactFormValues = z.infer<typeof contactFormSchema>;
 
 const ContactSection = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<ContactFormValues>({
+    resolver: zodResolver(contactFormSchema),
+    defaultValues: {
+      name: "",
+      company: "",
+      email: "",
+      message: "",
+    },
+  });
+
+  const onSubmit = async (data: ContactFormValues) => {
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          company: data.company || "Not provided",
+          message: data.message,
+          _subject: `New message from ${data.name} — DOSITA Contact Form`,
+          _replyto: data.email,
+          _template: "table",
+          _captcha: "false",
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error("Failed to send message");
+      }
+
+      toast.success("Message sent successfully!", {
+        description: "We'll get back to you as soon as possible.",
+      });
+      reset();
+    } catch {
+      toast.error("Failed to send message", {
+        description: "Please try again later or contact us by phone.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-32 px-6 bg-background">
       <div className="max-w-7xl mx-auto">
@@ -60,19 +134,32 @@ const ContactSection = () => {
         {/* Form */}
         <div className="max-w-2xl mx-auto bg-secondary rounded-[2.5rem] p-8 md:p-10 text-engineering-navy">
           <h3 className="text-2xl font-bold mb-8 text-center">Send Us A Message</h3>
-          <form className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-xs font-bold uppercase tracking-widest opacity-60">
                   Full Name
                 </Label>
-                <Input id="name" placeholder="Full Name" className="bg-background border-none rounded-xl p-4 h-auto" />
+                <Input
+                  id="name"
+                  placeholder="Full Name"
+                  className="bg-background border-none rounded-xl p-4 h-auto"
+                  {...register("name")}
+                />
+                {errors.name && (
+                  <p className="text-sm text-destructive">{errors.name.message}</p>
+                )}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="company" className="text-xs font-bold uppercase tracking-widest opacity-60">
                   Company
                 </Label>
-                <Input id="company" placeholder="Company" className="bg-background border-none rounded-xl p-4 h-auto" />
+                <Input
+                  id="company"
+                  placeholder="Company"
+                  className="bg-background border-none rounded-xl p-4 h-auto"
+                  {...register("company")}
+                />
               </div>
             </div>
 
@@ -80,22 +167,50 @@ const ContactSection = () => {
               <Label htmlFor="email" className="text-xs font-bold uppercase tracking-widest opacity-60">
                 Email Address
               </Label>
-              <Input id="email" type="email" placeholder="email@company.com" className="bg-background border-none rounded-xl p-4 h-auto" />
+              <Input
+                id="email"
+                type="email"
+                placeholder="email@company.com"
+                className="bg-background border-none rounded-xl p-4 h-auto"
+                {...register("email")}
+              />
+              {errors.email && (
+                <p className="text-sm text-destructive">{errors.email.message}</p>
+              )}
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="message" className="text-xs font-bold uppercase tracking-widest opacity-60">
                 Message
               </Label>
-              <Textarea id="message" placeholder="How can we help?" rows={5} className="bg-background border-none rounded-xl p-4 resize-none" />
+              <Textarea
+                id="message"
+                placeholder="How can we help?"
+                rows={5}
+                className="bg-background border-none rounded-xl p-4 resize-none"
+                {...register("message")}
+              />
+              {errors.message && (
+                <p className="text-sm text-destructive">{errors.message.message}</p>
+              )}
             </div>
 
             <Button
               type="submit"
-              className="w-full py-6 rounded-xl bg-primary text-white font-bold text-base hover:brightness-110 transition-all"
+              disabled={isSubmitting}
+              className="w-full py-6 rounded-xl bg-primary text-white font-bold text-base hover:brightness-110 transition-all disabled:opacity-70"
             >
-              Send Message
-              <Send className="ml-2 h-4 w-4" />
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  Send Message
+                  <Send className="ml-2 h-4 w-4" />
+                </>
+              )}
             </Button>
           </form>
         </div>
