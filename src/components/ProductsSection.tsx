@@ -55,11 +55,11 @@ const ProductsSection = () => {
               {allProducts.map((product) => (
                 <CarouselItem key={product.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
                   <Card className="group relative bg-white rounded-[2.5rem] p-8 border border-border shadow-sm hover:shadow-2xl transition-all duration-500 h-full flex flex-col overflow-hidden">
-                    <div className="relative h-48 w-full bg-gradient-to-br from-secondary to-muted rounded-2xl mb-8 overflow-hidden">
+                    <div className="relative mb-8 h-48 w-full overflow-hidden rounded-2xl bg-white">
                       <img
                         src={product.image}
                         alt={product.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
                       />
                       <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm p-3 rounded-full text-primary">
                         {product.icon}

@@ -152,7 +152,7 @@ function FullscreenViewer({
                       : "opacity-50 hover:opacity-100"
                   )}
                 >
-                  <img src={src} alt="" className="h-full w-full object-cover" draggable={false} />
+                  <img src={src} alt="" className="h-full w-full object-contain p-1" draggable={false} />
                 </button>
               ))}
             </div>
@@ -310,7 +310,7 @@ export function ProductImageGallery({
                 alt={`${productTitle} — product image ${selected + 1}`}
                 draggable={false}
                 className={cn(
-                  "h-full w-full select-none object-contain p-8 transition-transform duration-300 ease-out sm:p-12",
+                  "h-full w-full select-none object-contain p-4 transition-transform duration-300 ease-out sm:p-6",
                   zoom ? "scale-[1.6]" : "scale-100"
                 )}
                 style={

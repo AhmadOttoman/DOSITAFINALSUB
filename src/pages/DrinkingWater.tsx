@@ -32,11 +32,11 @@ const DrinkingWater = () => {
                 key={product.id}
                 className="group relative flex h-full flex-col overflow-hidden rounded-[2.5rem] bg-white p-8 border border-border shadow-sm transition-all duration-500 hover:shadow-2xl"
               >
-                <div className="relative mb-8 h-56 w-full overflow-hidden rounded-2xl bg-gradient-to-br from-secondary to-muted">
+                <div className="relative mb-8 h-56 w-full overflow-hidden rounded-2xl bg-white">
                   <img
                     src={product.image}
                     alt={product.title}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute bottom-3 left-3 rounded-full bg-white/90 p-3 text-primary backdrop-blur-sm">
                     {product.icon}
