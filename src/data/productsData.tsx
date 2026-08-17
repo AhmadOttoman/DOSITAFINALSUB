@@ -1,7 +1,6 @@
 import uvSystemsDrinking1 from "@/assets/uv-systems-drinking-1.png";
 import uvSystemsDrinking2 from "@/assets/uv-systems-drinking-2.png";
 import uvSystemsDrinking3 from "@/assets/uv-systems-drinking-3.png";
-import uvSystemsDrinking4 from "@/assets/uv-systems-drinking-4.png";
 import uvSystemsDrinking5 from "@/assets/uv-systems-drinking-5.png";
 import csiSystemsDrinking1 from "@/assets/csi-systems-drinking-1.png";
 import csiSystemsDrinking2 from "@/assets/csi-systems-drinking-2.png";
@@ -37,7 +36,7 @@ export const uvSystemsProduct: Product = {
   id: "uv-systems-drinking",
   title: "UV Systems",
   description: "Advanced ultraviolet disinfection systems for chemical-free drinking water treatment and pathogen elimination.",
-  image: uvSystemsDrinking1,
+  image: uvSystemsDrinking5,
   icon: <Zap className="h-8 w-8 text-primary" />,
   features: [
     "UV-C technology for disinfection",
@@ -72,8 +71,7 @@ Dosita has been a developer & supplier of UV disinfection systems since 2000, wi
   productImages: [
     uvSystemsDrinking2,
     uvSystemsDrinking3,
-    uvSystemsDrinking4,
-    uvSystemsDrinking5,
+    uvSystemsDrinking1,
   ],
 };
 
