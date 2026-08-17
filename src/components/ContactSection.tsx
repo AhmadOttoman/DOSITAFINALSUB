@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader2, Send, MapPin, Phone } from "lucide-react";
 
-const CONTACT_EMAIL = "ahmodi094@gmail.com";
+const CONTACT_EMAIL = "info@dosita.com.tr";
 
 const contactFormSchema = z.object({
   name: z.string().min(1, "Full name is required"),
