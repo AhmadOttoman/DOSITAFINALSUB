@@ -1,5 +1,4 @@
 import uvSystemsDrinking1 from "@/assets/uv-systems-drinking-1.png";
-import uvSystemsDrinking2 from "@/assets/uv-systems-drinking-2.png";
 import uvSystemsDrinking3 from "@/assets/uv-systems-drinking-3.png";
 import uvSystemsDrinking5 from "@/assets/uv-systems-drinking-5.png";
 import csiSystemsDrinking1 from "@/assets/csi-systems-drinking-1.png";
@@ -69,7 +68,6 @@ Dosita has been a developer & supplier of UV disinfection systems since 2000, wi
     { title: "UVSafe Brochure", url: "/manuals/uvisafe-brochure-1-5.pdf" },
   ],
   productImages: [
-    uvSystemsDrinking2,
     uvSystemsDrinking3,
     uvSystemsDrinking1,
   ],
