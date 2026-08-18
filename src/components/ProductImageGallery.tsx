@@ -180,14 +180,23 @@ export function ProductImageGallery({
   const mobileStripRef = React.useRef<HTMLDivElement>(null);
   const touchStartX = React.useRef<number | null>(null);
   const imageWrapRef = React.useRef<HTMLDivElement>(null);
+  const skipThumbnailScrollRef = React.useRef(true);
 
   React.useEffect(() => {
     setSelected((i) => (slides.length ? Math.min(i, slides.length - 1) : 0));
   }, [slides.length]);
 
   React.useEffect(() => {
+    skipThumbnailScrollRef.current = true;
+  }, [productTitle]);
+
+  React.useEffect(() => {
     const strip = mobileStripRef.current;
     if (!strip) return;
+    if (skipThumbnailScrollRef.current) {
+      skipThumbnailScrollRef.current = false;
+      return;
+    }
     const el = strip.querySelector<HTMLElement>(`[data-thumb-index="${selected}"]`);
     el?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
   }, [selected]);
